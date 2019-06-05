@@ -15,6 +15,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblMessages;
 @property (weak, nonatomic) IBOutlet UIButton *btnConnect;
 @property (weak, nonatomic) IBOutlet UIButton *btnSubscribe;
+@property (weak, nonatomic) IBOutlet UIButton *btnPublish;
+@property (weak, nonatomic) IBOutlet UITextField *txtPublish;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblPublish;
 
 @property MQTTSession *m_Session;
 
@@ -25,27 +29,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //设置边框颜色
-    self.btnConnect.layer.borderColor = [[UIColor blackColor] CGColor];
-    //设置边框宽度
-    self.btnConnect.layer.borderWidth = 1.0f;
-    //给按钮设置角的弧度
-    self.btnConnect.layer.cornerRadius = 5.0f;
-    //设置背景颜色
-    self.btnConnect.backgroundColor = [UIColor cyanColor];
-    self.btnConnect.layer.masksToBounds = YES;
-    
-    //设置边框颜色
-    self.btnSubscribe.layer.borderColor = [[UIColor redColor] CGColor];
-    //设置边框宽度
-    self.btnSubscribe.layer.borderWidth = 1.0f;
-    //给按钮设置角的弧度
-    self.btnSubscribe.layer.cornerRadius = 5.0f;
-    //设置背景颜色
-    self.btnSubscribe.backgroundColor = [UIColor cyanColor];
-    self.btnSubscribe.layer.masksToBounds = YES;
+    [self changeBtnStyle:self.btnConnect];
+    [self changeBtnStyle:self.btnSubscribe];
+    [self changeBtnStyle:self.btnPublish];
     
 }
+
+-(void) changeBtnStyle:(UIButton *)button
+{
+    //设置边框颜色
+    button.layer.borderColor = [[UIColor colorWithRed:117.0/255.0 green:109.0/255.0 blue:145.0/255.0 alpha:1.0] CGColor];
+    //设置边框宽度
+    button.layer.borderWidth = 1.8f;
+    //给按钮设置角的弧度
+    button.layer.cornerRadius = 15.0f;
+    //设置背景颜色
+    button.backgroundColor = [UIColor cyanColor];
+    button.layer.masksToBounds = YES;}
 
 - (IBAction)Connect:(id)sender {
     MQTTTransport *m_Transport = [[MQTTCFSocketTransport alloc] init];
@@ -60,7 +60,7 @@
         // Do some work
         if(error)
         {
-            NSLog(@"连接失败");
+            NSLog(@"连接失败 %@",error.localizedDescription);
             self.lblConnect.text = @"连接失败";
         }
         else
@@ -81,6 +81,25 @@
             self.lblSubscribe.text = @"订阅成功";
         }
     }];
+}
+
+- (IBAction)Publish:(id)sender {
+    
+    NSString *msg = self.txtPublish.text;
+    [self.m_Session publishData:[msg dataUsingEncoding:NSUTF8StringEncoding] onTopic:@"test" retain:NO qos:MQTTQosLevelAtLeastOnce publishHandler:^(NSError *error) {
+        if(error)
+        {
+            NSLog(@"发布失败 %@",error.localizedDescription);
+            self.lblPublish.text = @"发布失败";
+        }
+        else
+        {
+            NSLog(@"发布成功");
+            self.lblPublish.text = @"发布成功";
+        }
+        
+    }];
+
 }
 
 - (void)newMessage:(MQTTSession *)session data:(NSData *)data onTopic:(NSString *)topic qos:(MQTTQosLevel)qos retained:(BOOL)retained mid:(unsigned int)mid {
