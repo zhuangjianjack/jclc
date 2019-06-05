@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -100,7 +100,6 @@
 				9CE9D6305B8615511A37C3FF /* Pods-SmartFarm.debug.xcconfig */,
 				3F83CA3E25618F2EB2A7326E /* Pods-SmartFarm.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
