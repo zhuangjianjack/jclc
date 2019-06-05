@@ -1,0 +1,6 @@
+framework module Pods_SmartFarm {
+  umbrella header "Pods-SmartFarm-umbrella.h"
+
+  export *
+  module * { export * }
+}
