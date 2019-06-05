@@ -12,13 +12,22 @@
 @interface FirstViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lblConnect;
 @property (weak, nonatomic) IBOutlet UILabel *lblSubscribe;
-@property (weak, nonatomic) IBOutlet UILabel *lblMessages;
+@property (weak, nonatomic) IBOutlet UILabel *lblPublish;
+@property (weak, nonatomic) IBOutlet UILabel *lblTemperature;
+@property (weak, nonatomic) IBOutlet UILabel *lblSalinity;
+@property (weak, nonatomic) IBOutlet UILabel *lblAir;
+@property (weak, nonatomic) IBOutlet UILabel *lblLight;
+@property (weak, nonatomic) IBOutlet UILabel *lblSoil;
+@property (weak, nonatomic) IBOutlet UILabel *lblConductivity;
+
+
 @property (weak, nonatomic) IBOutlet UIButton *btnConnect;
 @property (weak, nonatomic) IBOutlet UIButton *btnSubscribe;
 @property (weak, nonatomic) IBOutlet UIButton *btnPublish;
+
 @property (weak, nonatomic) IBOutlet UITextField *txtPublish;
 
-@property (weak, nonatomic) IBOutlet UILabel *lblPublish;
+
 
 @property MQTTSession *m_Session;
 
@@ -85,8 +94,29 @@
 
 - (IBAction)Publish:(id)sender {
     
-    NSString *msg = self.txtPublish.text;
-    [self.m_Session publishData:[msg dataUsingEncoding:NSUTF8StringEncoding] onTopic:@"test" retain:NO qos:MQTTQosLevelAtLeastOnce publishHandler:^(NSError *error) {
+    //模拟发布JSON信息
+    NSDictionary *dict = @{@"温度" : @"25",
+                           @"盐分" : @"543",
+                           @"空气湿度" : @"79",
+                           @"光照" : @"3495",
+                           @"土壤湿度" : @"89",
+                           @"电导率" : @"4236"
+                           };
+    
+    // 当前对象是否能够转换成JSON数据.
+    BOOL isValid = [NSJSONSerialization isValidJSONObject:dict];
+    if (!isValid) {
+        NSLog(@"发布格式不正确");
+        return;
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    
+    //模拟发布String信息
+    //NSString *msg = self.txtPublish.text;
+    //data:[msg dataUsingEncoding:NSUTF8StringEncoding]
+    
+    //模拟发布JSON信息
+    [self.m_Session publishData:jsonData onTopic:@"test" retain:NO qos:MQTTQosLevelAtLeastOnce publishHandler:^(NSError *error) {
         if(error)
         {
             NSLog(@"发布失败 %@",error.localizedDescription);
@@ -105,10 +135,28 @@
 - (void)newMessage:(MQTTSession *)session data:(NSData *)data onTopic:(NSString *)topic qos:(MQTTQosLevel)qos retained:(BOOL)retained mid:(unsigned int)mid {
     // New message received in topic
     NSLog(@"订阅的主题是： %@",topic);
+    //模拟接收String信息
     //把接收到的内容转为字符串
-    NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"收到的消息是： %@",dataString);
-    self.lblMessages.text = dataString;
+//    NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//    NSLog(@"收到的消息是： %@",dataString);
+//    self.lblMessages.text = dataString;
+    
+    id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    if ([jsonObj isKindOfClass:[NSDictionary class]]) {
+        //强制转换为 NSDictionary
+        NSDictionary * dic = (NSDictionary *)jsonObj;
+        //将解析出来的数据赋给 UITextView 并设置为追加内容
+        self.lblTemperature.text = [NSString stringWithFormat:@"%@", [dic objectForKey:@"温度"]];
+        self.lblSalinity.text = [NSString stringWithFormat:@"%@", [dic objectForKey:@"盐分"]];
+        self.lblAir.text = [NSString stringWithFormat:@"%@", [dic objectForKey:@"空气湿度"]];
+        self.lblLight.text = [NSString stringWithFormat:@"%@", [dic objectForKey:@"光照"]];
+        self.lblSoil.text = [NSString stringWithFormat:@"%@", [dic objectForKey:@"土壤湿度"]];
+        self.lblConductivity.text = [NSString stringWithFormat:@"%@", [dic objectForKey:@"电导率"]];
+    }
+    else
+    {
+        NSLog(@"接收格式不正确");
+    }
 }
 
 
