@@ -139,9 +139,9 @@
     //把接收到的内容转为字符串
     NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
-//    dataString = [dataString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+////    dataString = [dataString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
     dataString = [dataString stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    dataString = [dataString stringByReplacingOccurrencesOfString:@"\\d+" withString:@"\"$0\""];
+////    dataString = [dataString stringByReplacingOccurrencesOfString:@"\\d+" withString:@"\"$0\""];
     NSRange range = [dataString rangeOfString:@"Time"];
     NSString *str1 = [NSString stringWithFormat:@"%@", NSStringFromRange(range)];
     NSString *str2 = [str1 substringWithRange:NSMakeRange(1, 3)];
@@ -197,11 +197,24 @@
                 return;
             }
     NSLog(@"输出%@",dict);
+
+    NSArray *payloadArr = [dict objectForKey:@"Payload"];
+    NSLog(@"消息体：%@",payloadArr);
+    NSMutableArray *dataArr;
+//
+    for(NSDictionary *dic in payloadArr)
+    {
+        NSString *data = [NSString stringWithFormat:@"%@",[dic objectForKey:@"Data"]];
+        NSLog(@"数据是：%@",data);
+        [dataArr addObject:data];
+    }
+    NSLog(@"数据：%@",dataArr);
+    NSMutableArray *data1 = dataArr[0];
+    NSString *temp = [NSString stringWithFormat:@"%@",data1[0]];
+    NSLog(@"温度：%@",temp);
 //    self.lblMessages.text = dataString;
 
 //    id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-//    NSDictionary *dict = jsonObj[@"Payload"];
-//    NSLog(@"输出%@",dict);
 //    if ([jsonObj isKindOfClass:[NSDictionary class]]) {
 //        NSLog(@"接收格式1");
 //        NSMutableArray *id1 = [(NSDictionary*)[jsonObj objectAtIndex:0] objectForKey:@"Payload"];
@@ -210,10 +223,10 @@
 //        //强制转换为 NSDictionary
 //        NSDictionary * dic = (NSDictionary *)jsonObj;
 //        //将解析出来的数据赋给 UITextView 并设置为追加内容
-//        self.lblTemperature.text = [NSString stringWithFormat:@"%@", [dic objectForKey:@"Payload[0]:Data[0]"]];
+//        self.lblTemperature.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"温度"]];
 //        self.lblSalinity.text = [NSString stringWithFormat:@"%@", [dic objectForKey:@"盐分"]];
-//        self.lblAir.text = [NSString stringWithFormat:@"%@", [dic objectForKey:@"Payload[0]:Data[1]"]];
-//        self.lblLight.text = [NSString stringWithFormat:@"%@", [dic objectForKey:@"Payload[0]:Data[2]"]];
+//        self.lblAir.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"空气湿度"]];
+//        self.lblLight.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"光照"]];
 //        self.lblSoil.text = [NSString stringWithFormat:@"%@", [dic objectForKey:@"土壤湿度"]];
 //        self.lblConductivity.text = [NSString stringWithFormat:@"%@", [dic objectForKey:@"电导率"]];
 //    }
@@ -240,7 +253,7 @@
 //    {
 //        NSLog(@"接收格式不正确");
 //    }
+//    }
 }
-
 
 @end
