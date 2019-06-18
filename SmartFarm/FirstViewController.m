@@ -81,7 +81,7 @@
 }
 
 - (IBAction)SubScribe:(id)sender {
-    [self.m_Session subscribeToTopic:@"jcsf/gh/iotdata" atLevel:MQTTQosLevelExactlyOnce subscribeHandler:^(NSError *error, NSArray<NSNumber *> *gQoss) {
+    [self.m_Session subscribeToTopic:@"jcsf/gh/iotdata" atLevel:MQTTQosLevelAtLeastOnce subscribeHandler:^(NSError *error, NSArray<NSNumber *> *gQoss) {
         if (error) {
             NSLog(@"订阅失败 %@", error.localizedDescription);
             self.lblSubscribe.text = @"订阅失败";
