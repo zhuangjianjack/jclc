@@ -118,11 +118,7 @@
                 i++;
             }
             
-//            {
-//                NSString* wendu = DataArray[0];
-//                NSString* shidu = DataArray[1];
-//                NSString* guangzhao = DataArray[2];
-//            }
+
             
             
         }
