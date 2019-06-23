@@ -19,13 +19,47 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="首页" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="首页" image="icon_home" selectedImage="icon_home_active" id="acW-dT-cKf">
+                        <inset key="largeContentSizeImageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="1"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
-        <!--Second-->
+        <!--智能场景-->
+        <scene sceneID="JST-xx-23p">
+            <objects>
+                <viewController id="J7e-eT-ziC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NoJ-uW-nmT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="FjT-tD-OFN"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="智能场景" image="icon_scene" selectedImage="icon_scene_active" id="f5d-5p-o9U"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Ro-zw-E9u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="1028"/>
+        </scene>
+        <!--设置-->
+        <scene sceneID="2uF-nc-7sY">
+            <objects>
+                <viewController id="M1L-5L-ROH" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0h1-Rr-QlO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="b8p-af-Pfi"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="设置" image="icon_setting" selectedImage="icon_setting_active" id="c3B-Jq-qe0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5ha-Qa-wO7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="753" y="1692"/>
+        </scene>
+        <!--摄像头-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="SecondViewController" sceneMemberID="viewController">
@@ -56,7 +90,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="摄像头" image="icon_camera" selectedImage="icon_camera_active" id="cPa-gy-q4n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -65,7 +99,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController id="49e-Tb-3d3" customClass="TabBarController" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -74,6 +108,8 @@
                     <connections>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="J7e-eT-ziC" kind="relationship" relationship="viewControllers" id="kQ4-D2-i2U"/>
+                        <segue destination="M1L-5L-ROH" kind="relationship" relationship="viewControllers" id="hN4-oR-zel"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -82,7 +118,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="icon_camera" width="20" height="25"/>
+        <image name="icon_camera_active" width="20" height="25"/>
+        <image name="icon_home" width="26" height="25"/>
+        <image name="icon_home_active" width="25" height="24"/>
+        <image name="icon_scene" width="25" height="25"/>
+        <image name="icon_scene_active" width="23" height="23"/>
+        <image name="icon_setting" width="24" height="25"/>
+        <image name="icon_setting_active" width="23" height="22"/>
     </resources>
 </document>

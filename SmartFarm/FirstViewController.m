@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSString *light;
 @property (nonatomic, strong) NSString *air;
 
+
 @end
 
 @implementation FirstViewController
@@ -34,6 +35,8 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithRed:239.0/255.0 green:244.0/255.0 blue:244.0/255.0 alpha:1.0];
+    
+    
     
     [self addPagerView];
     [self addPageControl];
@@ -139,74 +142,13 @@
             {
                 //设置lbl的text
                 _temp = [NSString stringWithFormat:@"%@",DataArray[0]];
-                _light = [NSString stringWithFormat:@"%@",DataArray[1]];
-                _air = [NSString stringWithFormat:@"%@",DataArray[2]];
+                _air = [NSString stringWithFormat:@"%@",DataArray[1]];
+                _light = [NSString stringWithFormat:@"%@",DataArray[2]];
             }
         }
     };
     
 }
-
-//- (void)newMessage:(MQTTSession *)session data:(NSData *)data onTopic:(NSString *)topic qos:(MQTTQosLevel)qos retained:(BOOL)retained mid:(unsigned int)mid {
-//    // New message received in topic
-//    NSLog(@"订阅的主题是： %@",topic);
-//
-//    NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    NSLog(@"收到的是：%@",dataString);
-//    //NSData* jsonData = [dataString dataUsingEncoding:NSUTF8StringEncoding];
-//    //解析 data 对象
-//    // 返回值可能会 字典，也可能为 数组，所以用 id 类型接受
-//    id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-//    if(jsonObj == nil){
-//        NSLog(@"为空！\n");
-//    }
-//
-//    if ([jsonObj isKindOfClass:[NSDictionary class]]) {
-//        //强制转换为 NSDictionary
-//        NSDictionary * dic = (NSDictionary *)jsonObj;
-//
-//        NSString* Obj = [dic objectForKey:@"Obj"];
-//        NSLog(@"Obj is %@\n", Obj);
-//        NSString* Num = [dic objectForKey:@"Num"];
-//        NSLog(@"Num is %@\n", Num);
-//
-//        NSArray* TimeArray = [dic objectForKey:@"Time"];
-//        NSArray* PayLoadArray = [dic objectForKey:@"Payload"];
-//        int i = 0;
-//        for(dic in TimeArray){
-//            NSLog(@"Time is %@",TimeArray[i]);
-//            i++;
-//        }
-//
-//        for (dic in PayLoadArray) {
-//            NSLog(@"!!!!!\n");
-//            NSString* ID = [dic objectForKey:@"ID"];
-//            NSLog(@"ID is %@\n",ID);
-//            NSString* Type = [dic objectForKey:@"Type"];
-//            NSLog(@"Type is %@\n",Type);
-//            NSArray* DataArray = [dic objectForKey:@"Data"];
-//            int i=0;
-//            for(dic in DataArray){
-//                NSLog(@"Data is %@",DataArray[i]);
-//                i++;
-//            }
-//        }
-//
-//
-//
-//
-////        //订阅 control  时
-////        NSString* Cmd = [dic objectForKey:@"Cmd"];
-////        NSLog(@"Cmd is %@\n",Cmd);
-////        NSString* ID = [dic objectForKey:@"ID"];
-////        NSLog(@"ID is %@\n",ID);
-////        NSString* Obj = [dic objectForKey:@"Obj"];
-////        NSLog(@"Obj is %@\n",Obj);
-////        NSString* Param = [dic objectForKey:@"Param"];
-////        NSLog(@"Param is %@\n",Param);
-//
-//    }
-
 
 -(void)viewDidAppear:(BOOL)animated{
     [self changePageViewStyle];

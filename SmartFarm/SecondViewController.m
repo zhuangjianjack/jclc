@@ -89,7 +89,7 @@
         NSLog(@"Obj is %@\n", Obj);
         NSString* Num = [dic objectForKey:@"Num"];
         NSLog(@"Num is %@\n", Num);
-
+        
         NSArray* TimeArray = [dic objectForKey:@"Time"];
         NSArray* PayLoadArray = [dic objectForKey:@"Payload"];
         int i = 0;
@@ -97,7 +97,7 @@
             NSLog(@"Time is %@",TimeArray[i]);
             i++;
         }
-
+        
         
         for (dic in PayLoadArray) {
             NSLog(@"!!!!!\n");
@@ -118,30 +118,30 @@
                 i++;
             }
             
-
+            
             
             
         }
         
-//                //订阅 control  时
-//                NSString* Cmd = [dic objectForKey:@"Cmd"];
-//                NSLog(@"Cmd is %@\n",Cmd);
-//                NSString* ID = [dic objectForKey:@"ID"];
-//                NSLog(@"ID is %@\n",ID);
-//                NSString* Obj = [dic objectForKey:@"Obj"];
-//                NSLog(@"Obj is %@\n",Obj);
-//                NSString* Param = [dic objectForKey:@"Param"];
-//                NSLog(@"Param is %@\n",Param);
-//
+        //                //订阅 control  时
+        //                NSString* Cmd = [dic objectForKey:@"Cmd"];
+        //                NSLog(@"Cmd is %@\n",Cmd);
+        //                NSString* ID = [dic objectForKey:@"ID"];
+        //                NSLog(@"ID is %@\n",ID);
+        //                NSString* Obj = [dic objectForKey:@"Obj"];
+        //                NSLog(@"Obj is %@\n",Obj);
+        //                NSString* Param = [dic objectForKey:@"Param"];
+        //                NSLog(@"Param is %@\n",Param);
+        //
     }
 }
 
 -(void)getWheather{
     //NSURL * url = [NSURL URLWithString:@"https://free-api.heweather.net/s6/weather/now?location=chengdu&key=13a9b1d6ec1a4ebf91f8c9957ec669df"];
     NSURL * url = [NSURL URLWithString:@"http://www.weather.com.cn/data/cityinfo/101200701.html"];
-
     
-
+    
+    
     NSString * jsonStr = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
     NSLog(@"😍\n%@\n",jsonStr);
 }
