@@ -10,6 +10,9 @@
 
 @interface AppDelegate ()
 
+//HeConfigInstance.kHeAppUsername = @"HE1906210939241728";
+//HeConfigInstance.kHeAppKey = @"13a9b1d6ec1a4ebf91f8c9957ec669df";
+
 @end
 
 @implementation AppDelegate

@@ -126,7 +126,11 @@
 }
 
 -(void)getWheather{
-    NSURL * url = [NSURL URLWithString:@"https://free-api.heweather.net/s6/weather/now?location=chengdu&key=742f85879aff416c8e8e9d6d33dfd4cd"];
+    //NSURL * url = [NSURL URLWithString:@"https://free-api.heweather.net/s6/weather/now?location=chengdu&key=13a9b1d6ec1a4ebf91f8c9957ec669df"];
+    NSURL * url = [NSURL URLWithString:@"http://www.weather.com.cn/data/cityinfo/101200701.html"];
+
+    
+
     NSString * jsonStr = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
     NSLog(@"😍\n%@\n",jsonStr);
 }
