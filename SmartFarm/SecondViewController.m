@@ -137,13 +137,39 @@
 }
 
 -(void)getWheather{
-    //NSURL * url = [NSURL URLWithString:@"https://free-api.heweather.net/s6/weather/now?location=chengdu&key=13a9b1d6ec1a4ebf91f8c9957ec669df"];
-    NSURL * url = [NSURL URLWithString:@"http://www.weather.com.cn/data/cityinfo/101200701.html"];
+    NSURL * url = [NSURL URLWithString:@"https://www.tianqiapi.com/api/?version=v6&cityid=101270107"];
     
+    NSData* jsonData = [NSData dataWithContentsOfURL:url];
+    id jsonObj = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
     
+    NSDictionary* dic = (NSDictionary *)jsonObj;
     
-    NSString * jsonStr = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
-    NSLog(@"😍\n%@\n",jsonStr);
+    NSString* jsonStr = [self transformDic:dic];
+    
+    NSLog(@"%@\n😎",jsonStr);
+    
+    NSString* tem = [dic objectForKey:@"tem"];//当前温度
+    
+    NSLog(@"当前温度是%@\n",tem);
+    
+    NSString* wea = [dic objectForKey:@"wea"];//天气状况
+    
+    NSLog(@"天气状况是 %@ \n",wea);
+    
+}
+
+- (NSString *)transformDic:(NSDictionary *)dic {
+    if (![dic count]) {
+        return nil;
+    }
+    NSString *tempStr1 =
+    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
+                                                 withString:@"\\U"];
+    NSString *tempStr2 =[tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    NSString *tempStr3 =[[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *str = [NSPropertyListSerialization propertyListWithData:tempData options:NSPropertyListImmutable format:NULL error:NULL];
+    return str;
 }
 
 @end
