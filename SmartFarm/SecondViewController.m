@@ -15,6 +15,12 @@
 @property (weak, nonatomic) IBOutlet UISlider *conID3;
 @property (weak, nonatomic) IBOutlet UISlider *conID4;
 @property (weak, nonatomic) IBOutlet UISwitch *conID5;
+
+@property (weak, nonatomic) IBOutlet UISlider *sliderSun;
+@property (weak, nonatomic) IBOutlet UISlider *sliderTop;
+@property (weak, nonatomic) IBOutlet UISlider *sliderSide;
+
+
 - (IBAction)publicID1:(id)sender;
 - (IBAction)publicID5:(id)sender;
 - (IBAction)publicID2:(id)sender;
@@ -33,7 +39,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor colorWithRed:239.0/255.0 green:244.0/255.0 blue:244.0/255.0 alpha:1.0];
+    
+    [self changeSliderStyle:_sliderSun];
+    [self changeSliderStyle:_sliderTop];
+    [self changeSliderStyle:_sliderSide];
+    
     [self mqttConnect];
+    
 }
 
 -(void)mqttConnect{
@@ -244,12 +257,13 @@
         _conID2.value = 2;
     }
     NSDictionary *dict;
+    //0停，1开，2关
     if(_conID2.value == 0){
-        dict = @{@"Obj":@"SW",@"ID":@"2",@"Cmd":@"Action",@"Param":@"0"};
-    }else if(_conID2.value == 1){
-        dict = @{@"Obj":@"SW",@"ID":@"2",@"Cmd":@"Action",@"Param":@"1"};
-    }else{
         dict = @{@"Obj":@"SW",@"ID":@"2",@"Cmd":@"Action",@"Param":@"2"};
+    }else if(_conID2.value == 1){
+        dict = @{@"Obj":@"SW",@"ID":@"2",@"Cmd":@"Action",@"Param":@"0"};
+    }else{
+        dict = @{@"Obj":@"SW",@"ID":@"2",@"Cmd":@"Action",@"Param":@"1"};
     }
     
     BOOL isValid = [NSJSONSerialization isValidJSONObject:dict];
@@ -283,11 +297,11 @@
     }
     NSDictionary *dict;
     if(_conID3.value == 0){
-        dict = @{@"Obj":@"SW",@"ID":@"3",@"Cmd":@"Action",@"Param":@"0"};
-    }else if(_conID3.value == 1){
-        dict = @{@"Obj":@"SW",@"ID":@"3",@"Cmd":@"Action",@"Param":@"1"};
-    }else{
         dict = @{@"Obj":@"SW",@"ID":@"3",@"Cmd":@"Action",@"Param":@"2"};
+    }else if(_conID3.value == 1){
+        dict = @{@"Obj":@"SW",@"ID":@"3",@"Cmd":@"Action",@"Param":@"0"};
+    }else{
+        dict = @{@"Obj":@"SW",@"ID":@"3",@"Cmd":@"Action",@"Param":@"1"};
     }
     
     BOOL isValid = [NSJSONSerialization isValidJSONObject:dict];
@@ -321,11 +335,11 @@
     }
     NSDictionary *dict;
     if(_conID4.value == 0){
-        dict = @{@"Obj":@"SW",@"ID":@"4",@"Cmd":@"Action",@"Param":@"0"};
-    }else if(_conID4.value == 1){
-        dict = @{@"Obj":@"SW",@"ID":@"4",@"Cmd":@"Action",@"Param":@"1"};
-    }else{
         dict = @{@"Obj":@"SW",@"ID":@"4",@"Cmd":@"Action",@"Param":@"2"};
+    }else if(_conID4.value == 1){
+        dict = @{@"Obj":@"SW",@"ID":@"4",@"Cmd":@"Action",@"Param":@"0"};
+    }else{
+        dict = @{@"Obj":@"SW",@"ID":@"4",@"Cmd":@"Action",@"Param":@"1"};
     }
     
     BOOL isValid = [NSJSONSerialization isValidJSONObject:dict];
@@ -347,4 +361,14 @@
         }
     }];
 }
+
+-(void)changeSliderStyle:(UISlider *)slider{
+    [slider setThumbImage:[UIImage imageNamed:@"SliderThumb-Normal"] forState:UIControlStateNormal];
+//    UIEdgeInsets insets = UIEdgeInsetsMake(0, 15, 0, 15);
+//    [slider setMinimumTrackImage:[[UIImage imageNamed:@"SliderTrackLeft"]resizableImageWithCapInsets:insets] forState:UIControlStateNormal];
+    [slider setMinimumTrackImage:[UIImage imageNamed:@"SliderTrackLeft"] forState:UIControlStateNormal];
+//    [slider setMaximumTrackImage:[[UIImage imageNamed:@"SliderTrackRight"]resizableImageWithCapInsets:insets] forState:UIControlStateNormal];
+    [slider setMaximumTrackImage:[UIImage imageNamed:@"SliderTrackRight"] forState:UIControlStateNormal];
+}
+
 @end
