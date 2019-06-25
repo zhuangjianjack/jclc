@@ -26,6 +26,10 @@
 @property (nonatomic, strong) NSString *light;
 @property (nonatomic, strong) NSString *air;
 
+@property (weak, nonatomic) IBOutlet UILabel *weaTemp;
+@property (weak, nonatomic) IBOutlet UILabel *weaPM;
+@property (weak, nonatomic) IBOutlet UILabel *weaWea;
+@property (weak, nonatomic) IBOutlet UILabel *weaWind;
 
 @end
 
@@ -44,6 +48,8 @@
     [self loadData];
     
     [self mqttConnect];
+    
+    [self getWheather];
     
 }
 
@@ -138,7 +144,7 @@
                 NSLog(@"Data is %@",DataArray[i]);
                 i++;
             }
-            if([numID isEqualToNumber:[NSNumber numberWithInteger:1]])
+            if([numID isEqualToNumber:[NSNumber numberWithInteger:1]] && DataArray.count == 3)
             {
                 //设置lbl的text
                 _temp = [NSString stringWithFormat:@"%@",DataArray[0]];
@@ -226,6 +232,55 @@
 - (void)pagerView:(TYCyclePagerView *)pageView didScrollFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex {
     _pageControl.currentPage = toIndex;
     NSLog(@"%ld ->  %ld",fromIndex,toIndex);
+}
+
+
+-(void)getWheather{
+    NSURL * url = [NSURL URLWithString:@"https://www.tianqiapi.com/api/?version=v6&cityid=101270107"];
+    
+    NSData* jsonData = [NSData dataWithContentsOfURL:url];
+    id jsonObj = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
+    
+    NSDictionary* dic = (NSDictionary *)jsonObj;
+    
+    NSString* jsonStr = [self transformDic:dic];
+    
+    NSLog(@"%@\n😎",jsonStr);
+    
+    NSString* tem = [dic objectForKey:@"tem"];//当前温度
+    
+    NSLog(@"当前温度是%@\n",tem);
+    _weaTemp.text = tem;
+    
+    NSString* wea = [dic objectForKey:@"wea"];//天气状况
+    
+    NSLog(@"天气状况是 %@ \n",wea);
+    _weaWea.text = wea;
+    
+    NSString* pm = [dic objectForKey:@"air_pm25"];//PM2.5
+    
+    NSLog(@"PM2.5是 %@ \n",pm);
+    _weaPM.text = pm;
+    
+    NSString* wind = [dic objectForKey:@"win"];//PM2.5
+    
+    NSLog(@"风向是 %@ \n",wind);
+    _weaWind.text = wind;
+    
+}
+
+- (NSString *)transformDic:(NSDictionary *)dic {
+    if (![dic count]) {
+        return nil;
+    }
+    NSString *tempStr1 =
+    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
+                                                 withString:@"\\U"];
+    NSString *tempStr2 =[tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    NSString *tempStr3 =[[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *str = [NSPropertyListSerialization propertyListWithData:tempData options:NSPropertyListImmutable format:NULL error:NULL];
+    return str;
 }
 
 @end
