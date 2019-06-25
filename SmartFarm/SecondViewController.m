@@ -235,8 +235,13 @@
 }
 
 - (IBAction)publicID2:(id)sender {
-    if(_conID2.value != 0 && _conID2.value != 2){
+    _conID2.continuous = false;
+    if(_conID2.value >= 0.5 && _conID2.value <= 1.5){
         _conID2.value = 1;
+    }else if(_conID2.value < 0.5){
+        _conID2.value = 0;
+    }else{
+        _conID2.value = 2;
     }
     NSDictionary *dict;
     if(_conID2.value == 0){
@@ -268,8 +273,13 @@
 }
 
 - (IBAction)publicID3:(id)sender {
-    if(_conID3.value != 0 && _conID3.value != 2){
+    _conID3.continuous = false;
+    if(_conID3.value >= 0.5 && _conID3.value <= 1.5){
         _conID3.value = 1;
+    }else if(_conID3.value < 0.5){
+        _conID3.value = 0;
+    }else{
+        _conID3.value = 2;
     }
     NSDictionary *dict;
     if(_conID3.value == 0){
@@ -301,8 +311,13 @@
 }
 
 - (IBAction)publicID4:(id)sender {
-    if(_conID4.value != 0 && _conID4.value != 2){
+    _conID4.continuous = false;
+    if(_conID4.value >= 0.5 && _conID4.value <= 1.5){
         _conID4.value = 1;
+    }else if(_conID4.value < 0.5){
+        _conID4.value = 0;
+    }else{
+        _conID4.value = 2;
     }
     NSDictionary *dict;
     if(_conID4.value == 0){
