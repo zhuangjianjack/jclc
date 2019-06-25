@@ -10,11 +10,18 @@
 #import <MQTTClient.h>
 
 @interface SecondViewController ()
-@property (weak, nonatomic) IBOutlet UISlider *conID1;
+@property (weak, nonatomic) IBOutlet UISwitch *conID1;
 @property (weak, nonatomic) IBOutlet UISlider *conID2;
 @property (weak, nonatomic) IBOutlet UISlider *conID3;
 @property (weak, nonatomic) IBOutlet UISlider *conID4;
-@property (weak, nonatomic) IBOutlet UISlider *conID5;
+@property (weak, nonatomic) IBOutlet UISwitch *conID5;
+- (IBAction)publicID1:(id)sender;
+- (IBAction)publicID5:(id)sender;
+- (IBAction)publicID2:(id)sender;
+- (IBAction)publicID3:(id)sender;
+- (IBAction)publicID4:(id)sender;
+
+
 
 
 @property MQTTSession *m_Session;
@@ -141,14 +148,14 @@
         int intParam = [Param intValue];
         switch (intID) {
             case 0:
-                _conID1.value = intParam;
+                _conID1.on = intParam;
                 _conID2.value = intParam;
                 _conID3.value = intParam;
                 _conID4.value = intParam;
-                _conID5.value = intParam;
+                _conID5.on = intParam;
                 break;
             case 1:
-                _conID1.value = intParam;
+                _conID1.on = intParam;
                 break;
             case 2:
                 _conID2.value = intParam;
@@ -160,7 +167,7 @@
                 _conID4.value = intParam;
                 break;
             case 5:
-                _conID5.value = intParam;
+                _conID5.on = intParam;
                 break;
             default:
                 break;
@@ -170,4 +177,174 @@
 }
 
 
+- (IBAction)publicID1:(id)sender {
+    NSDictionary *dict;
+    if(_conID1.on == 0){
+        dict = @{@"Obj":@"SW",@"ID":@"1",@"Cmd":@"Action",@"Param":@"0"};
+    }else{
+        dict = @{@"Obj":@"SW",@"ID":@"1",@"Cmd":@"Action",@"Param":@"1"};
+    }
+    
+    BOOL isValid = [NSJSONSerialization isValidJSONObject:dict];
+    if (!isValid) {
+        NSLog(@"发布格式不正确");
+        return;
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    
+    //发布信息
+    [self.m_Session publishData:jsonData onTopic:@"jcsf/gh/control" retain:NO qos:MQTTQosLevelAtLeastOnce publishHandler:^(NSError *error) {
+        if(error)
+        {
+            NSLog(@"发布失败 %@",error.localizedDescription);
+        }
+        else
+        {
+            NSLog(@"发布成功");
+        }
+    }];
+    
+}
+
+- (IBAction)publicID5:(id)sender {
+    NSDictionary *dict;
+    if(_conID5.on == 0){
+        dict = @{@"Obj":@"SW",@"ID":@"5",@"Cmd":@"Action",@"Param":@"0"};
+    }else{
+        dict = @{@"Obj":@"SW",@"ID":@"5",@"Cmd":@"Action",@"Param":@"1"};
+    }
+    
+    BOOL isValid = [NSJSONSerialization isValidJSONObject:dict];
+    if (!isValid) {
+        NSLog(@"发布格式不正确");
+        return;
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    
+    //发布信息
+    [self.m_Session publishData:jsonData onTopic:@"jcsf/gh/control" retain:NO qos:MQTTQosLevelAtLeastOnce publishHandler:^(NSError *error) {
+        if(error)
+        {
+            NSLog(@"发布失败 %@",error.localizedDescription);
+        }
+        else
+        {
+            NSLog(@"发布成功");
+        }
+    }];
+}
+
+- (IBAction)publicID2:(id)sender {
+    _conID2.continuous = false;
+    if(_conID2.value >= 0.5 && _conID2.value <= 1.5){
+        _conID2.value = 1;
+    }else if(_conID2.value < 0.5){
+        _conID2.value = 0;
+    }else{
+        _conID2.value = 2;
+    }
+    NSDictionary *dict;
+    if(_conID2.value == 0){
+        dict = @{@"Obj":@"SW",@"ID":@"2",@"Cmd":@"Action",@"Param":@"0"};
+    }else if(_conID2.value == 1){
+        dict = @{@"Obj":@"SW",@"ID":@"2",@"Cmd":@"Action",@"Param":@"1"};
+    }else{
+        dict = @{@"Obj":@"SW",@"ID":@"2",@"Cmd":@"Action",@"Param":@"2"};
+    }
+    
+    BOOL isValid = [NSJSONSerialization isValidJSONObject:dict];
+    if (!isValid) {
+        NSLog(@"发布格式不正确");
+        return;
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    
+    //发布信息
+    [self.m_Session publishData:jsonData onTopic:@"jcsf/gh/control" retain:NO qos:MQTTQosLevelAtLeastOnce publishHandler:^(NSError *error) {
+        if(error)
+        {
+            NSLog(@"发布失败 %@",error.localizedDescription);
+        }
+        else
+        {
+            NSLog(@"发布成功");
+        }
+    }];
+}
+
+- (IBAction)publicID3:(id)sender {
+    _conID3.continuous = false;
+    if(_conID3.value >= 0.5 && _conID3.value <= 1.5){
+        _conID3.value = 1;
+    }else if(_conID3.value < 0.5){
+        _conID3.value = 0;
+    }else{
+        _conID3.value = 2;
+    }
+    NSDictionary *dict;
+    if(_conID3.value == 0){
+        dict = @{@"Obj":@"SW",@"ID":@"3",@"Cmd":@"Action",@"Param":@"0"};
+    }else if(_conID3.value == 1){
+        dict = @{@"Obj":@"SW",@"ID":@"3",@"Cmd":@"Action",@"Param":@"1"};
+    }else{
+        dict = @{@"Obj":@"SW",@"ID":@"3",@"Cmd":@"Action",@"Param":@"2"};
+    }
+    
+    BOOL isValid = [NSJSONSerialization isValidJSONObject:dict];
+    if (!isValid) {
+        NSLog(@"发布格式不正确");
+        return;
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    
+    //发布信息
+    [self.m_Session publishData:jsonData onTopic:@"jcsf/gh/control" retain:NO qos:MQTTQosLevelAtLeastOnce publishHandler:^(NSError *error) {
+        if(error)
+        {
+            NSLog(@"发布失败 %@",error.localizedDescription);
+        }
+        else
+        {
+            NSLog(@"发布成功");
+        }
+    }];
+}
+
+- (IBAction)publicID4:(id)sender {
+    _conID4.continuous = false;
+    if(_conID4.value >= 0.5 && _conID4.value <= 1.5){
+        _conID4.value = 1;
+    }else if(_conID4.value < 0.5){
+        _conID4.value = 0;
+    }else{
+        _conID4.value = 2;
+    }
+    NSDictionary *dict;
+    if(_conID4.value == 0){
+        dict = @{@"Obj":@"SW",@"ID":@"4",@"Cmd":@"Action",@"Param":@"0"};
+    }else if(_conID4.value == 1){
+        dict = @{@"Obj":@"SW",@"ID":@"4",@"Cmd":@"Action",@"Param":@"1"};
+    }else{
+        dict = @{@"Obj":@"SW",@"ID":@"4",@"Cmd":@"Action",@"Param":@"2"};
+    }
+    
+    BOOL isValid = [NSJSONSerialization isValidJSONObject:dict];
+    if (!isValid) {
+        NSLog(@"发布格式不正确");
+        return;
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    
+    //发布信息
+    [self.m_Session publishData:jsonData onTopic:@"jcsf/gh/control" retain:NO qos:MQTTQosLevelAtLeastOnce publishHandler:^(NSError *error) {
+        if(error)
+        {
+            NSLog(@"发布失败 %@",error.localizedDescription);
+        }
+        else
+        {
+            NSLog(@"发布成功");
+        }
+    }];
+}
 @end
