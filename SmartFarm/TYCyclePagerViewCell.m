@@ -57,21 +57,21 @@
     
     UILabel *lblTemp = [[UILabel alloc]init];
     lblTemp.text = @"25";
-    lblTemp.textColor = [UIColor colorWithRed:89.0/255.0 green:221.0/255.0 blue:112.0/255.0 alpha:1.0];
+    lblTemp.textColor = [UIColor colorWithRed:76.0/255.0 green:217.0/255.0 blue:100.0/255.0 alpha:1.0];
     lblTemp.font = [UIFont boldSystemFontOfSize:24];
     lblTemp.textAlignment = NSTextAlignmentRight;
     lblTemp.frame = CGRectMake(62, 112.5, 100, 25);
     
     UILabel *lblLight = [[UILabel alloc]init];
     lblLight.text = @"3495";
-    lblLight.textColor = [UIColor colorWithRed:89.0/255.0 green:221.0/255.0 blue:112.0/255.0 alpha:1.0];
+    lblLight.textColor = [UIColor colorWithRed:76.0/255.0 green:217.0/255.0 blue:100.0/255.0 alpha:1.0];
     lblLight.font = [UIFont boldSystemFontOfSize:24];
     lblLight.textAlignment = NSTextAlignmentRight;
     lblLight.frame = CGRectMake(252, 112.5, 100, 25);
     
     UILabel *lblAir = [[UILabel alloc]init];
     lblAir.text = @"79";
-    lblAir.textColor = [UIColor colorWithRed:89.0/255.0 green:221.0/255.0 blue:112.0/255.0 alpha:1.0];
+    lblAir.textColor = [UIColor colorWithRed:76.0/255.0 green:217.0/255.0 blue:100.0/255.0 alpha:1.0];
     lblAir.font = [UIFont boldSystemFontOfSize:24];
     lblAir.textAlignment = NSTextAlignmentRight;
     lblAir.frame = CGRectMake(62, 222, 100, 25);
