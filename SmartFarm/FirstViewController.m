@@ -31,6 +31,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *weaWea;
 @property (weak, nonatomic) IBOutlet UILabel *weaWind;
 
+@property (weak, nonatomic) IBOutlet UIImageView *imgViewWea;
+@property (weak, nonatomic) UIImage *imgWea;
+
+
 @end
 
 @implementation FirstViewController
@@ -84,7 +88,7 @@
 -(void)mqttSubscribe{
     //订阅
     NSLog(@"mqttSubscribe😄\n");
-    [self.m_Session subscribeToTopic:@"jcsf/gh/iotdata" atLevel:MQTTQosLevelExactlyOnce subscribeHandler:^(NSError *error, NSArray<NSNumber *> *gQoss) {
+    [self.m_Session subscribeToTopic:@"jcsf/gh/iotdata" atLevel:MQTTQosLevelAtMostOnce subscribeHandler:^(NSError *error, NSArray<NSNumber *> *gQoss) {
         if (error) {
             NSLog(@"订阅失败 %@", error.localizedDescription);
         } else {
@@ -256,6 +260,7 @@
     
     NSLog(@"天气状况是 %@ \n",wea);
     _weaWea.text = wea;
+    [self changeImgWea:wea];
     
     NSString* pm = [dic objectForKey:@"air_pm25"];//PM2.5
     
@@ -266,7 +271,6 @@
     
     NSLog(@"风向是 %@ \n",wind);
     _weaWind.text = wind;
-    
 }
 
 - (NSString *)transformDic:(NSDictionary *)dic {
@@ -281,6 +285,63 @@
     NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
     NSString *str = [NSPropertyListSerialization propertyListWithData:tempData options:NSPropertyListImmutable format:NULL error:NULL];
     return str;
+}
+
+-(void)changeImgWea:(NSString *)weather{
+    if([weather  isEqualToString:@"雨"])
+    {
+        _imgWea = [UIImage imageNamed:@"yu"];
+        _imgViewWea.image = _imgWea;
+        _imgViewWea.frame = CGRectMake(37, 117, 70, 66.5);
+    }
+    else if([weather  isEqualToString:@"阴"])
+    {
+        _imgWea = [UIImage imageNamed:@"yin"];
+        _imgViewWea.image = _imgWea;
+        _imgViewWea.frame = CGRectMake(37, 117, 70, 43.8);
+    }
+    else if([weather  isEqualToString:@"云"])
+    {
+        _imgWea = [UIImage imageNamed:@"duoyun"];
+        _imgViewWea.image = _imgWea;
+        _imgViewWea.frame = CGRectMake(37, 130, 70, 43.8);
+    }
+    else if([weather  isEqualToString:@"雾"])
+    {
+        _imgWea = [UIImage imageNamed:@"wu"];
+        _imgViewWea.image = _imgWea;
+        _imgViewWea.frame = CGRectMake(37, 114, 70, 71.2);
+    }
+    else if([weather  isEqualToString:@"晴"])
+    {
+        _imgWea = [UIImage imageNamed:@"qing"];
+        _imgViewWea.image = _imgWea;
+        _imgViewWea.frame = CGRectMake(37, 117, 70, 70);
+    }
+    else if([weather  isEqualToString:@"雷"])
+    {
+        _imgWea = [UIImage imageNamed:@"lei"];
+        _imgViewWea.image = _imgWea;
+        _imgViewWea.frame = CGRectMake(60, 117, 38.5, 70);
+    }
+    else if([weather  isEqualToString:@"沙尘"])
+    {
+        _imgWea = [UIImage imageNamed:@"shachen"];
+        _imgViewWea.image = _imgWea;
+        _imgViewWea.frame = CGRectMake(37, 135, 70, 36.7);
+    }
+    else if([weather  isEqualToString:@"雪"])
+    {
+        _imgWea = [UIImage imageNamed:@"xue"];
+        _imgViewWea.image = _imgWea;
+        _imgViewWea.frame = CGRectMake(37, 113, 70, 76);
+    }
+    else if([weather  isEqualToString:@"冰雹"])
+    {
+        _imgWea = [UIImage imageNamed:@"bingbao"];
+        _imgViewWea.image = _imgWea;
+        _imgViewWea.frame = CGRectMake(37, 113, 70, 74);
+    }
 }
 
 @end

@@ -1,8 +1,8 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking" "${PODS_CONFIGURATION_BUILD_DIR}/MQTTClient" "${PODS_CONFIGURATION_BUILD_DIR}/TYCyclePagerView" "${PODS_CONFIGURATION_BUILD_DIR}/YYModel"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/MQTTClient" "${PODS_CONFIGURATION_BUILD_DIR}/TYCyclePagerView"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking/AFNetworking.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/MQTTClient/MQTTClient.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/TYCyclePagerView/TYCyclePagerView.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/YYModel/YYModel.framework/Headers"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/MQTTClient/MQTTClient.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/TYCyclePagerView/TYCyclePagerView.framework/Headers"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_LDFLAGS = $(inherited) -framework "AFNetworking" -framework "CoreFoundation" -framework "CoreGraphics" -framework "Foundation" -framework "MQTTClient" -framework "MobileCoreServices" -framework "Security" -framework "SystemConfiguration" -framework "TYCyclePagerView" -framework "YYModel"
+OTHER_LDFLAGS = $(inherited) -framework "MQTTClient" -framework "TYCyclePagerView"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.

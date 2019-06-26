@@ -28,8 +28,8 @@
                                 <color key="textColor" red="0.29803921568627451" green="0.85098039215686272" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="moderate_rain" translatesAutoresizingMaskIntoConstraints="NO" id="PWY-PD-MjB">
-                                <rect key="frame" x="37" y="117" width="70" height="64"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="yu" translatesAutoresizingMaskIntoConstraints="NO" id="PWY-PD-MjB">
+                                <rect key="frame" x="37" y="117" width="70" height="66.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PM2.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YH-vz-3r4">
@@ -46,8 +46,8 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="gLA-BO-IrS">
-                                <rect key="frame" x="139" y="117" width="46" height="64"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="gLA-BO-IrS">
+                                <rect key="frame" x="139" y="117" width="46" height="68"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="郫县" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqD-jo-6Ia">
@@ -57,13 +57,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中雨" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fgd-FK-y7o">
-                                        <rect key="frame" x="0.0" y="23" width="46" height="18"/>
+                                        <rect key="frame" x="0.0" y="25" width="46" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.69019607839999997" green="0.69411764710000001" blue="0.70196078429999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="西北风" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZXv-Xn-Fhe">
-                                        <rect key="frame" x="0.0" y="46" width="46" height="18"/>
+                                        <rect key="frame" x="0.0" y="50" width="46" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.69019607839999997" green="0.69411764710000001" blue="0.70196078429999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -98,6 +98,7 @@
                         <inset key="largeContentSizeImageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="1"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="imgViewWea" destination="PWY-PD-MjB" id="zou-5d-NpF"/>
                         <outlet property="weaPM" destination="sX2-QW-5P8" id="J50-OI-TxD"/>
                         <outlet property="weaTemp" destination="oOY-qP-9FB" id="Xp2-F0-MuI"/>
                         <outlet property="weaWea" destination="Fgd-FK-y7o" id="pTA-oF-QZD"/>
@@ -149,11 +150,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fan" translatesAutoresizingMaskIntoConstraints="NO" id="6EV-jK-UiL">
-                                <rect key="frame" x="12" y="129" width="350" height="80"/>
+                                <rect key="frame" x="12" y="136" width="350" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="light-1" translatesAutoresizingMaskIntoConstraints="NO" id="g9Q-xV-2JO">
-                                <rect key="frame" x="12" y="227" width="350" height="80"/>
+                                <rect key="frame" x="12" y="230" width="350" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sunshade" translatesAutoresizingMaskIntoConstraints="NO" id="zrB-Ho-Qoo">
@@ -176,7 +177,7 @@
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="环流风机" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebn-6G-dHN">
-                                <rect key="frame" x="99" y="159" width="70" height="21"/>
+                                <rect key="frame" x="99" y="166" width="70" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -218,21 +219,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="照明灯" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9K-va-BUd">
-                                <rect key="frame" x="99" y="257" width="52" height="21"/>
+                                <rect key="frame" x="99" y="260" width="52" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6Cg-Ma-xgu">
-                                <rect key="frame" x="285" y="154" width="49" height="31"/>
+                                <rect key="frame" x="285" y="161" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="publicID1:" destination="8rJ-Kc-sve" eventType="valueChanged" id="nkr-Jc-g99"/>
                                 </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Sgo-Ir-n7U">
-                                <rect key="frame" x="285" y="252" width="49" height="31"/>
+                                <rect key="frame" x="285" y="255" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="publicID5:" destination="8rJ-Kc-sve" eventType="valueChanged" id="Dp1-1t-eHT"/>
@@ -353,9 +354,9 @@
         <image name="icon_setting" width="24" height="25"/>
         <image name="icon_setting_active" width="23" height="22"/>
         <image name="light-1" width="500" height="114"/>
-        <image name="moderate_rain" width="203" height="185"/>
         <image name="sunshade" width="500" height="114"/>
         <image name="switch_tab" width="1000" height="120"/>
         <image name="weather" width="1000" height="400"/>
+        <image name="yu" width="91" height="86"/>
     </resources>
 </document>

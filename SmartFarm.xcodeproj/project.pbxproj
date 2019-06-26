@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		151D1BA722BF1C6300E86768 /* shujuControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 151D1BA622BF1C6300E86768 /* shujuControl.m */; };
-		153A460322BC7070001C8158 /* HeWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153A460222BC7070001C8158 /* HeWeather.framework */; };
 		833877E007A8CA8B3044B8E1 /* Pods_SmartFarm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2224D445AA410252F9CE68B /* Pods_SmartFarm.framework */; };
 		CB6626E822BF8DB200BA582B /* TYCyclePagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6626E722BF8DB200BA582B /* TYCyclePagerViewCell.m */; };
 		CB6626EE22BF9ED600BA582B /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6626ED22BF9ED600BA582B /* TabBarController.m */; };
@@ -42,7 +41,6 @@
 
 /* Begin PBXFileReference section */
 		151D1BA622BF1C6300E86768 /* shujuControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = shujuControl.m; sourceTree = "<group>"; };
-		153A460222BC7070001C8158 /* HeWeather.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HeWeather.framework; sourceTree = "<group>"; };
 		3F83CA3E25618F2EB2A7326E /* Pods-SmartFarm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartFarm.release.xcconfig"; path = "Target Support Files/Pods-SmartFarm/Pods-SmartFarm.release.xcconfig"; sourceTree = "<group>"; };
 		9CE9D6305B8615511A37C3FF /* Pods-SmartFarm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartFarm.debug.xcconfig"; path = "Target Support Files/Pods-SmartFarm/Pods-SmartFarm.debug.xcconfig"; sourceTree = "<group>"; };
 		CB6626E622BF8DB200BA582B /* TYCyclePagerViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYCyclePagerViewCell.h; sourceTree = "<group>"; };
@@ -75,7 +73,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				153A460322BC7070001C8158 /* HeWeather.framework in Frameworks */,
 				833877E007A8CA8B3044B8E1 /* Pods_SmartFarm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,7 +114,6 @@
 		CB7F516522A6C2EC00D5111B = {
 			isa = PBXGroup;
 			children = (
-				153A460222BC7070001C8158 /* HeWeather.framework */,
 				CB7F517022A6C2EC00D5111B /* SmartFarm */,
 				CB7F518C22A6C2EE00D5111B /* SmartFarmTests */,
 				CB7F519722A6C2EE00D5111B /* SmartFarmUITests */,

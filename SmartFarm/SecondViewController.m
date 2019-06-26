@@ -101,57 +101,57 @@
     if ([jsonObj isKindOfClass:[NSDictionary class]]) {
         //强制转换为 NSDictionary
         NSDictionary * dic = (NSDictionary *)jsonObj;
-//
-//
-//        //订阅iotdata时
-//        NSString* Obj = [dic objectForKey:@"Obj"];
-//        NSLog(@"Obj is %@\n", Obj);
-//        NSString* Num = [dic objectForKey:@"Num"];
-//        NSLog(@"Num is %@\n", Num);
-//
-//        NSArray* TimeArray = [dic objectForKey:@"Time"];
-//        NSArray* PayLoadArray = [dic objectForKey:@"Payload"];
-//        int i = 0;
-//        for(dic in TimeArray){
-//            NSLog(@"Time is %@",TimeArray[i]);
-//            i++;
-//        }
-//
-//
-//        for (dic in PayLoadArray) {
-//            NSLog(@"!!!!!\n");
-//            NSString* ID = [dic objectForKey:@"ID"];
-//            NSLog(@"ID is %@\n",ID);
-//            NSNumber* nums = @([ID integerValue]);//NSString转化为NSNumber
-//            NSNumber* num1 = [NSNumber numberWithInteger:1];
-//            if([nums isEqualToNumber: num1])
-//            {
-//                NSLog(@"调试😎\n");
-//            }
-//            NSString* Type = [dic objectForKey:@"Type"];
-//            NSLog(@"Type is %@\n",Type);
-//            NSArray* DataArray = [dic objectForKey:@"Data"];
-//            int i=0;
-//            for(dic in DataArray){
-//                NSLog(@"Data is %@",DataArray[i]);
-//                i++;
-//            }
-//
-//
-//
-//
-//        }
+        //
+        //
+        //        //订阅iotdata时
+        //        NSString* Obj = [dic objectForKey:@"Obj"];
+        //        NSLog(@"Obj is %@\n", Obj);
+        //        NSString* Num = [dic objectForKey:@"Num"];
+        //        NSLog(@"Num is %@\n", Num);
+        //
+        //        NSArray* TimeArray = [dic objectForKey:@"Time"];
+        //        NSArray* PayLoadArray = [dic objectForKey:@"Payload"];
+        //        int i = 0;
+        //        for(dic in TimeArray){
+        //            NSLog(@"Time is %@",TimeArray[i]);
+        //            i++;
+        //        }
+        //
+        //
+        //        for (dic in PayLoadArray) {
+        //            NSLog(@"!!!!!\n");
+        //            NSString* ID = [dic objectForKey:@"ID"];
+        //            NSLog(@"ID is %@\n",ID);
+        //            NSNumber* nums = @([ID integerValue]);//NSString转化为NSNumber
+        //            NSNumber* num1 = [NSNumber numberWithInteger:1];
+        //            if([nums isEqualToNumber: num1])
+        //            {
+        //                NSLog(@"调试😎\n");
+        //            }
+        //            NSString* Type = [dic objectForKey:@"Type"];
+        //            NSLog(@"Type is %@\n",Type);
+        //            NSArray* DataArray = [dic objectForKey:@"Data"];
+        //            int i=0;
+        //            for(dic in DataArray){
+        //                NSLog(@"Data is %@",DataArray[i]);
+        //                i++;
+        //            }
+        //
+        //
+        //
+        //
+        //        }
         
-                        //订阅 control  时
-                        NSString* Cmd = [dic objectForKey:@"Cmd"];
-                        NSLog(@"Cmd is %@\n",Cmd);
-                        NSString* ID = [dic objectForKey:@"ID"];
-                        NSLog(@"ID is %@\n",ID);
-                        NSString* Obj = [dic objectForKey:@"Obj"];
-                        NSLog(@"Obj is %@\n",Obj);
-                        NSString* Param = [dic objectForKey:@"Param"];
-                        NSLog(@"Param is %@\n",Param);
-    
+        //订阅 control  时
+        NSString* Cmd = [dic objectForKey:@"Cmd"];
+        NSLog(@"Cmd is %@\n",Cmd);
+        NSString* ID = [dic objectForKey:@"ID"];
+        NSLog(@"ID is %@\n",ID);
+        NSString* Obj = [dic objectForKey:@"Obj"];
+        NSLog(@"Obj is %@\n",Obj);
+        NSString* Param = [dic objectForKey:@"Param"];
+        NSLog(@"Param is %@\n",Param);
+        
         int intID = [ID intValue];
         int intParam = [Param intValue];
         switch (intID) {
@@ -396,9 +396,9 @@
     [slider setThumbImage:[UIImage imageNamed:@"controller_dot"] forState:UIControlStateNormal];
     UIEdgeInsets insets = UIEdgeInsetsMake(0, 15, 0, 15);
     [slider setMinimumTrackImage:[[UIImage imageNamed:@"controller_slider"]resizableImageWithCapInsets:insets] forState:UIControlStateNormal];
-//    [slider setMinimumTrackImage:[UIImage imageNamed:@"controller_slider"] forState:UIControlStateNormal];
+    //    [slider setMinimumTrackImage:[UIImage imageNamed:@"controller_slider"] forState:UIControlStateNormal];
     [slider setMaximumTrackImage:[[UIImage imageNamed:@"controller_slider"]resizableImageWithCapInsets:insets] forState:UIControlStateNormal];
-//    [slider setMaximumTrackImage:[UIImage imageNamed:@"controller_slider"] forState:UIControlStateNormal];
+    //    [slider setMaximumTrackImage:[UIImage imageNamed:@"controller_slider"] forState:UIControlStateNormal];
 }
 
 @end
