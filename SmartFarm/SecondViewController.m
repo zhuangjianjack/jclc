@@ -16,11 +16,6 @@
 @property (weak, nonatomic) IBOutlet UISlider *conID4;
 @property (weak, nonatomic) IBOutlet UISwitch *conID5;
 
-@property (weak, nonatomic) IBOutlet UISlider *sliderSun;
-@property (weak, nonatomic) IBOutlet UISlider *sliderTop;
-@property (weak, nonatomic) IBOutlet UISlider *sliderSide;
-
-
 - (IBAction)publicID1:(id)sender;
 - (IBAction)publicID5:(id)sender;
 - (IBAction)publicID2:(id)sender;
@@ -41,9 +36,9 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:239.0/255.0 green:244.0/255.0 blue:244.0/255.0 alpha:1.0];
     
-    [self changeSliderStyle:_sliderSun];
-    [self changeSliderStyle:_sliderTop];
-    [self changeSliderStyle:_sliderSide];
+    [self changeSliderStyle:_conID2];
+    [self changeSliderStyle:_conID3];
+    [self changeSliderStyle:_conID4];
     
     [self mqttConnect];
     
@@ -171,13 +166,48 @@
                 _conID1.on = intParam;
                 break;
             case 2:
-                _conID2.value = intParam;
+                //传值：0停，1开，2关
+                //UI：0关，1停，2开
+                if(intParam == 0)
+                {
+                    _conID2.value = 1;
+                }
+                else if(intParam == 1)
+                {
+                    _conID2.value = 2;
+                }
+                else
+                {
+                    _conID2.value = 0;
+                }
                 break;
             case 3:
-                _conID3.value = intParam;
+                if(intParam == 0)
+                {
+                    _conID3.value = 1;
+                }
+                else if(intParam == 1)
+                {
+                    _conID3.value = 2;
+                }
+                else
+                {
+                    _conID3.value = 0;
+                }
                 break;
             case 4:
-                _conID4.value = intParam;
+                if(intParam == 0)
+                {
+                    _conID4.value = 1;
+                }
+                else if(intParam == 1)
+                {
+                    _conID4.value = 2;
+                }
+                else
+                {
+                    _conID4.value = 0;
+                }
                 break;
             case 5:
                 _conID5.on = intParam;

@@ -312,9 +312,6 @@
                         <outlet property="conID3" destination="AII-f8-VOK" id="AmM-YH-3i2"/>
                         <outlet property="conID4" destination="I6g-H6-n1n" id="tiq-yD-RVa"/>
                         <outlet property="conID5" destination="Sgo-Ir-n7U" id="xQR-LE-2Oy"/>
-                        <outlet property="sliderSide" destination="I6g-H6-n1n" id="R8p-hD-23W"/>
-                        <outlet property="sliderSun" destination="TOT-I4-hCx" id="16m-j7-Xcz"/>
-                        <outlet property="sliderTop" destination="AII-f8-VOK" id="GLR-uw-y8q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
