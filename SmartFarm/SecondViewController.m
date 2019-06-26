@@ -363,12 +363,12 @@
 }
 
 -(void)changeSliderStyle:(UISlider *)slider{
-    [slider setThumbImage:[UIImage imageNamed:@"SliderThumb-Normal"] forState:UIControlStateNormal];
-//    UIEdgeInsets insets = UIEdgeInsetsMake(0, 15, 0, 15);
-//    [slider setMinimumTrackImage:[[UIImage imageNamed:@"SliderTrackLeft"]resizableImageWithCapInsets:insets] forState:UIControlStateNormal];
-    [slider setMinimumTrackImage:[UIImage imageNamed:@"SliderTrackLeft"] forState:UIControlStateNormal];
-//    [slider setMaximumTrackImage:[[UIImage imageNamed:@"SliderTrackRight"]resizableImageWithCapInsets:insets] forState:UIControlStateNormal];
-    [slider setMaximumTrackImage:[UIImage imageNamed:@"SliderTrackRight"] forState:UIControlStateNormal];
+    [slider setThumbImage:[UIImage imageNamed:@"controller_dot"] forState:UIControlStateNormal];
+    UIEdgeInsets insets = UIEdgeInsetsMake(0, 15, 0, 15);
+    [slider setMinimumTrackImage:[[UIImage imageNamed:@"controller_slider"]resizableImageWithCapInsets:insets] forState:UIControlStateNormal];
+//    [slider setMinimumTrackImage:[UIImage imageNamed:@"controller_slider"] forState:UIControlStateNormal];
+    [slider setMaximumTrackImage:[[UIImage imageNamed:@"controller_slider"]resizableImageWithCapInsets:insets] forState:UIControlStateNormal];
+//    [slider setMaximumTrackImage:[UIImage imageNamed:@"controller_slider"] forState:UIControlStateNormal];
 }
 
 @end
