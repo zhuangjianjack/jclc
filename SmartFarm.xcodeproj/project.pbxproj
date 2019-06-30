@@ -20,6 +20,7 @@
 		CB7F518422A6C2EE00D5111B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7F518322A6C2EE00D5111B /* main.m */; };
 		CB7F518E22A6C2EE00D5111B /* SmartFarmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7F518D22A6C2EE00D5111B /* SmartFarmTests.m */; };
 		CB7F519922A6C2EE00D5111B /* SmartFarmUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7F519822A6C2EE00D5111B /* SmartFarmUITests.m */; };
+		CBCD57B122C7981300EFA721 /* SensorParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCD57B022C7981300EFA721 /* SensorParameter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,8 @@
 		CB7F519422A6C2EE00D5111B /* SmartFarmUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartFarmUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB7F519822A6C2EE00D5111B /* SmartFarmUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartFarmUITests.m; sourceTree = "<group>"; };
 		CB7F519A22A6C2EE00D5111B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CBCD57AF22C7981300EFA721 /* SensorParameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorParameter.h; sourceTree = "<group>"; };
+		CBCD57B022C7981300EFA721 /* SensorParameter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorParameter.m; sourceTree = "<group>"; };
 		E2224D445AA410252F9CE68B /* Pods_SmartFarm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartFarm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -152,6 +155,8 @@
 				CB6626E722BF8DB200BA582B /* TYCyclePagerViewCell.m */,
 				CB6626EC22BF9ED600BA582B /* TabBarController.h */,
 				CB6626ED22BF9ED600BA582B /* TabBarController.m */,
+				CBCD57AF22C7981300EFA721 /* SensorParameter.h */,
+				CBCD57B022C7981300EFA721 /* SensorParameter.m */,
 			);
 			path = SmartFarm;
 			sourceTree = "<group>";
@@ -355,6 +360,7 @@
 				CB7F518422A6C2EE00D5111B /* main.m in Sources */,
 				151D1BA722BF1C6300E86768 /* shujuControl.m in Sources */,
 				CB7F517622A6C2EC00D5111B /* FirstViewController.m in Sources */,
+				CBCD57B122C7981300EFA721 /* SensorParameter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,6 +543,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"MQTTClient\"",
+					"-framework",
+					"\"TYCyclePagerView\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Ssiswent.SmartFarm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -558,6 +571,13 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"MQTTClient\"",
+					"-framework",
+					"\"TYCyclePagerView\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Ssiswent.SmartFarm;
 				PRODUCT_NAME = "$(TARGET_NAME)";

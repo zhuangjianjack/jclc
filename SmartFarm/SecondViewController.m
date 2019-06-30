@@ -9,7 +9,7 @@
 #import "SecondViewController.h"
 #import <MQTTClient.h>
 
-@interface SecondViewController ()
+@interface SecondViewController ()<MQTTSessionDelegate>
 @property (weak, nonatomic) IBOutlet UISwitch *conID1;
 @property (weak, nonatomic) IBOutlet UISlider *conID2;
 @property (weak, nonatomic) IBOutlet UISlider *conID3;
