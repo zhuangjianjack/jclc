@@ -593,18 +593,47 @@
 }
 
 - (IBAction)publicID1:(id)sender {
+    NSDictionary *dict;
+    if(_conID1.on == 0){
+        dict = @{@"Obj":@"SW",@"ID":@"1",@"Cmd":@"Action",@"Param":@"0"};
+    }else{
+        dict = @{@"Obj":@"SW",@"ID":@"1",@"Cmd":@"Action",@"Param":@"1"};
+    }
+    
+    BOOL isValid = [NSJSONSerialization isValidJSONObject:dict];
+    if (!isValid) {
+        NSLog(@"发布格式不正确");
+        return;
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    
+    //发布信息
+    [self.m_Session publishData:jsonData onTopic:@"jcsf/gh/control" retain:NO qos:MQTTQosLevelAtLeastOnce publishHandler:^(NSError *error) {
+        if(error)
+        {
+            NSLog(@"发布失败 %@",error.localizedDescription);
+        }
+        else
+        {
+            NSLog(@"发布成功");
+        }
+    }];
 }
 
 - (IBAction)publicID2:(id)sender {
+    
 }
 
 - (IBAction)publicID3:(id)sender {
+    
 }
 
 - (IBAction)publicID4:(id)sender {
+    
 }
 
 - (IBAction)publicID5:(id)sender {
+    
 }
 
 

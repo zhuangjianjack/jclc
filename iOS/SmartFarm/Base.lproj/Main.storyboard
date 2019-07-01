@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -372,22 +372,22 @@
     <resources>
         <image name="fan" width="500" height="114"/>
         <image name="film_roller" width="500" height="114"/>
-        <image name="icon_camera" width="20" height="25"/>
-        <image name="icon_camera_active" width="20" height="25"/>
+        <image name="icon_camera" width="20.5" height="25.5"/>
+        <image name="icon_camera_active" width="20.5" height="25.5"/>
         <image name="icon_controller" width="20" height="18"/>
         <image name="icon_controller_active" width="20" height="18"/>
-        <image name="icon_home" width="26" height="25"/>
-        <image name="icon_home_active" width="25" height="24"/>
-        <image name="icon_scene" width="25" height="25"/>
-        <image name="icon_scene_active" width="23" height="23"/>
-        <image name="icon_sensor" width="19" height="21"/>
-        <image name="icon_sensor_active" width="19" height="21"/>
-        <image name="icon_setting" width="24" height="25"/>
-        <image name="icon_setting_active" width="23" height="22"/>
+        <image name="icon_home" width="26.5" height="25"/>
+        <image name="icon_home_active" width="25.5" height="24"/>
+        <image name="icon_scene" width="25.5" height="25.5"/>
+        <image name="icon_scene_active" width="23.5" height="23.5"/>
+        <image name="icon_sensor" width="19.5" height="21.5"/>
+        <image name="icon_sensor_active" width="19.5" height="21.5"/>
+        <image name="icon_setting" width="24" height="25.5"/>
+        <image name="icon_setting_active" width="23.5" height="22"/>
         <image name="light-1" width="500" height="114"/>
         <image name="sunshade" width="500" height="114"/>
         <image name="switch_tab" width="1000" height="120"/>
         <image name="weather" width="1000" height="400"/>
-        <image name="yu" width="91" height="86"/>
+        <image name="yu" width="91" height="86.5"/>
     </resources>
 </document>
