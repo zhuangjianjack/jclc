@@ -58,7 +58,11 @@
 @property (nonatomic, strong) NSString *conductivity;
 @property (nonatomic, strong) NSString *salinity;
 
-
+@property (weak, nonatomic) IBOutlet UISwitch *conID1;
+@property (weak, nonatomic) IBOutlet UISlider *conID2;
+@property (weak, nonatomic) IBOutlet UISlider *conID3;
+@property (weak, nonatomic) IBOutlet UISlider *conID4;
+@property (weak, nonatomic) IBOutlet UISwitch *conID5;
 
 @property (weak, nonatomic) IBOutlet UILabel *weaTemp;
 @property (weak, nonatomic) IBOutlet UILabel *weaPM;
@@ -587,5 +591,48 @@
         _imgViewWea.frame = CGRectMake(37, 113, 70, 74);
     }
 }
+
+- (IBAction)publicID1:(id)sender {
+}
+
+- (IBAction)publicID2:(id)sender {
+}
+
+- (IBAction)publicID3:(id)sender {
+}
+
+- (IBAction)publicID4:(id)sender {
+}
+
+- (IBAction)publicID5:(id)sender {
+}
+
+
+
+- (IBAction)actSensor:(id)sender {
+    _btnSensor.selected = true;
+    _btnController.selected = false;
+    [self switchSubview];
+}
+
+- (IBAction)actController:(id)sender {
+    _btnSensor.selected = false;
+    _btnController.selected = true;
+    [self switchSubview];
+}
+
+-(void)switchSubview{
+    if(_btnSensor.selected == true)
+    {
+        _pagerView.hidden = false;
+        
+    }
+    else
+    {
+        _pagerView.hidden = true;
+        
+    }
+}
+
 
 @end

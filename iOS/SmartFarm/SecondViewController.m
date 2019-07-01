@@ -16,6 +16,9 @@
 @property (weak, nonatomic) IBOutlet UISlider *conID4;
 @property (weak, nonatomic) IBOutlet UISwitch *conID5;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+
 - (IBAction)publicID1:(id)sender;
 - (IBAction)publicID5:(id)sender;
 - (IBAction)publicID2:(id)sender;
@@ -35,6 +38,8 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithRed:239.0/255.0 green:244.0/255.0 blue:244.0/255.0 alpha:1.0];
+    
+    self.scrollView.contentSize = CGSizeMake(350, 443);
     
     [self changeSliderStyle:_conID2];
     [self changeSliderStyle:_conID3];

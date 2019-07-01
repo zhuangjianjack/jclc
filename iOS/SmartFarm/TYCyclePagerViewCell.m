@@ -56,7 +56,6 @@
 - (void)addView {
     //    viewTemp.frame=CGRectMake(10, 266, temp.size.width, temp.size.height);
     //上面括号内的设置方式可以让图片以原图尺寸显示
-    //    [self addLabel:_label color:BlackColor text:@"光照温湿度变送器" alignment:NSTextAlignmentLeft x:10 y:30 width:200 height:30];
 }
 
 -(void)addLabel:(UILabel *)fromLable toLabel:(UILabel *)toLabel color:(UIColor *)color alignment:(NSTextAlignment)alignment x:(CGFloat)x y:(CGFloat)y width:(CGFloat)width height:(CGFloat)height{
