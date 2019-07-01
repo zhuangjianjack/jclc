@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".TapFragment1">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:id="@+id/ly_framset"
+        android:layout_width="395dp"
+        android:layout_height="590dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rel">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rel">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ly_chuangan1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/boorder"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/chuangan1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="传感器1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/chuangan1_name1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="108dp"
+                    android:layout_marginTop="20dp"
+                    android:text="正在获取请稍后"
+                    app:layout_constraintStart_toStartOf="@+id/chuangan1"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan1" />
+
+                <TextView
+                    android:id="@+id/chuangan1_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="正在获取请稍后"
+                    app:layout_constraintStart_toStartOf="@+id/chuangan1_name1"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan1_name1" />
+
+                <TextView
+                    android:id="@+id/chuangan1_name3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="正在获取请稍后"
+                    app:layout_constraintEnd_toEndOf="@+id/chuangan1_name2"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/chuangan1_name2"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan1_name2" />
+
+                <ImageView
+                    android:id="@+id/icon_temp1"
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/chuangan1_name1"
+                    app:layout_constraintTop_toBottomOf="@+id/icon_hum1"
+                    app:srcCompat="@drawable/greenicon" />
+
+                <ImageView
+                    android:id="@+id/icon_hum1"
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="88dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan1"
+                    app:srcCompat="@drawable/greenicon" />
+
+                <ImageView
+                    android:id="@+id/icon_light1"
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toStartOf="@+id/icon_temp1"
+                    app:layout_constraintTop_toBottomOf="@+id/icon_temp1"
+                    app:srcCompat="@drawable/greenicon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ly_chuangan2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="192dp"
+                android:background="@drawable/boorder"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/chuangan2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="传感器2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/chuangan2_name1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="108dp"
+                    android:layout_marginTop="20dp"
+                    android:text="正在获取请稍后"
+                    app:layout_constraintStart_toStartOf="@+id/chuangan2"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan2" />
+
+                <TextView
+                    android:id="@+id/chuangan2_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="正在获取请稍后"
+                    app:layout_constraintStart_toStartOf="@+id/chuangan2_name1"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan2_name1" />
+
+                <TextView
+                    android:id="@+id/chuangan2_name3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="正在获取请稍后"
+                    app:layout_constraintEnd_toEndOf="@+id/chuangan2_name2"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/chuangan2_name2"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan2_name2" />
+
+                <ImageView
+                    android:id="@+id/icon_temp2"
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="86dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan2"
+                    app:srcCompat="@drawable/greenicon" />
+
+                <ImageView
+                    android:id="@+id/icon_hum2"
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="@+id/icon_temp2"
+                    app:layout_constraintTop_toBottomOf="@+id/icon_temp2"
+                    app:srcCompat="@drawable/greenicon" />
+
+                <ImageView
+                    android:id="@+id/icon_CO2"
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="@+id/icon_hum2"
+                    app:layout_constraintTop_toBottomOf="@+id/icon_hum2"
+                    app:srcCompat="@drawable/greenicon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ly_chuangan3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/boorder"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ly_chuangan2">
+
+                <TextView
+                    android:id="@+id/chuangan3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="传感器3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/chuangan3_name1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="108dp"
+                    android:layout_marginTop="16dp"
+                    android:text="正在获取请稍后"
+                    app:layout_constraintStart_toStartOf="@+id/chuangan3"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan3" />
+
+                <TextView
+                    android:id="@+id/chuangan3_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="正在获取请稍后"
+                    app:layout_constraintStart_toStartOf="@+id/chuangan3_name1"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan3_name1" />
+
+                <ImageView
+                    android:id="@+id/icon_temp3"
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="88dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan3"
+                    app:srcCompat="@drawable/greenicon" />
+
+                <ImageView
+                    android:id="@+id/icon_hum3"
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="@+id/icon_temp3"
+                    app:layout_constraintTop_toBottomOf="@+id/icon_temp3"
+                    app:srcCompat="@drawable/greenicon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ly_chuangan4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/boorder"
+                app:layout_constraintStart_toStartOf="@+id/ly_chuangan2"
+                app:layout_constraintTop_toBottomOf="@+id/ly_chuangan3">
+
+                <TextView
+                    android:id="@+id/chuangan4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="传感器4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/chuangan4_name1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="108dp"
+                    android:layout_marginTop="16dp"
+                    android:text="正在获取请稍后"
+                    app:layout_constraintStart_toStartOf="@+id/chuangan4"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan4" />
+
+                <TextView
+                    android:id="@+id/chuangan4_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:text="正在获取请稍后"
+                    app:layout_constraintStart_toStartOf="@+id/chuangan4_name1"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan4_name1" />
+
+                <ImageView
+                    android:id="@+id/icon_temp4"
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="88dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan4"
+                    app:srcCompat="@drawable/greenicon" />
+
+                <ImageView
+                    android:id="@+id/icon_hum4"
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="@+id/icon_temp4"
+                    app:layout_constraintTop_toBottomOf="@+id/icon_temp4"
+                    app:srcCompat="@drawable/greenicon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ly_chuangan5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/boorder"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ly_chuangan4">
+
+                <TextView
+                    android:id="@+id/chuangan5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="传感器5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/chuangan5_name1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="108dp"
+                    android:layout_marginTop="8dp"
+                    android:text="正在获取请稍后"
+                    app:layout_constraintStart_toStartOf="@+id/chuangan5"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan5" />
+
+                <TextView
+                    android:id="@+id/chuangan5_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="正在获取请稍后"
+                    app:layout_constraintStart_toStartOf="@+id/chuangan5_name1"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan5_name1" />
+
+                <ImageView
+                    android:id="@+id/icon_temp5"
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="88dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan5"
+                    app:srcCompat="@drawable/greenicon" />
+
+                <ImageView
+                    android:id="@+id/icon_hum5"
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="@+id/icon_temp5"
+                    app:layout_constraintTop_toBottomOf="@+id/icon_temp5"
+                    app:srcCompat="@drawable/greenicon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ly_chuangan6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/boorder"
+                app:layout_constraintStart_toStartOf="@+id/ly_chuangan4"
+                app:layout_constraintTop_toBottomOf="@+id/ly_chuangan5">
+
+                <TextView
+                    android:id="@+id/chuangan6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="传感器6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/chuangan6_name1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="108dp"
+                    android:layout_marginTop="16dp"
+                    android:text="正在获取请稍后"
+                    app:layout_constraintStart_toStartOf="@+id/chuangan6"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan6" />
+
+                <TextView
+                    android:id="@+id/chuangan6_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="正在获取请稍后"
+                    app:layout_constraintStart_toStartOf="@+id/chuangan6_name1"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan6_name1" />
+
+                <ImageView
+                    android:id="@+id/icon_light2"
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="88dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chuangan6"
+                    app:srcCompat="@drawable/greenicon" />
+
+                <ImageView
+                    android:id="@+id/icon_yan"
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="@+id/icon_light2"
+                    app:layout_constraintTop_toBottomOf="@+id/icon_light2"
+                    app:srcCompat="@drawable/greenicon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

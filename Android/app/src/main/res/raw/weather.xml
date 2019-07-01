@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<infos>
+    <city id="cd">
+        <temp>20℃/30℃</temp>
+        <weather>晴</weather>
+        <name>成都</name>
+        <pm>80pm</pm>
+        <wind>4级</wind>
+    </city>
+</infos>
