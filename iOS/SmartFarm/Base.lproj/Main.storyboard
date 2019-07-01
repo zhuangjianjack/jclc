@@ -286,6 +286,7 @@
                         <outlet property="conID4" destination="I6g-H6-n1n" id="8MM-X8-yi4"/>
                         <outlet property="conID5" destination="Sgo-Ir-n7U" id="6eB-D9-aJE"/>
                         <outlet property="imgViewWea" destination="PWY-PD-MjB" id="zou-5d-NpF"/>
+                        <outlet property="scrollView" destination="F46-07-DWH" id="yGm-ar-Xx2"/>
                         <outlet property="weaPM" destination="sX2-QW-5P8" id="J50-OI-TxD"/>
                         <outlet property="weaTemp" destination="oOY-qP-9FB" id="Xp2-F0-MuI"/>
                         <outlet property="weaWea" destination="Fgd-FK-y7o" id="pTA-oF-QZD"/>
@@ -341,7 +342,6 @@
                     <tabBarItem key="tabBarItem" title="摄像头" image="icon_camera" selectedImage="icon_camera_active" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="conID5" destination="Sgo-Ir-n7U" id="xQR-LE-2Oy"/>
-                        <outlet property="scrollView" destination="F46-07-DWH" id="GYZ-6n-wW3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>

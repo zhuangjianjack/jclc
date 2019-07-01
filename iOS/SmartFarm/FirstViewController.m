@@ -75,6 +75,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSensor;
 @property (weak, nonatomic) IBOutlet UIButton *btnController;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+
 
 
 @end
@@ -84,28 +87,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.scrollView.contentSize = CGSizeMake(350, 443);
+    
+    [self changeSliderStyle:_conID2];
+    [self changeSliderStyle:_conID3];
+    [self changeSliderStyle:_conID4];
+    
     self.view.backgroundColor = [UIColor colorWithRed:239.0/255.0 green:244.0/255.0 blue:244.0/255.0 alpha:1.0];
     
-    self.m_data = [NSMutableArray arrayWithCapacity:6];
+//    self.m_data = [NSMutableArray arrayWithCapacity:6];
     
     //光照温湿度变送器
-    NSMutableArray* sensor1 = [NSMutableArray arrayWithCapacity:3];
-    //温度
-    SensorParameter* sp = [SensorParameter new];
-    sp.number = @"1";
-    sp.imageName = @"temp";
-    [sensor1 addObject:sp];
-    //光照
-    sp = [SensorParameter new];
-    sp.number = @"2";
-    sp.imageName = @"light";
-    [sensor1 addObject:sp];
-    //空气湿度
-    sp = [SensorParameter new];
-    sp.number = @"3";
-    sp.imageName = @"air_humidity";
-    [sensor1 addObject:sp];
-    [self.m_data addObject:sensor1];
+//    NSMutableArray* sensor1 = [NSMutableArray arrayWithCapacity:3];
+//    //温度
+//    SensorParameter* sp = [SensorParameter new];
+//    sp.number = @"1";
+//    sp.imageName = @"temp";
+//    [sensor1 addObject:sp];
+//    //光照
+//    sp = [SensorParameter new];
+//    sp.number = @"2";
+//    sp.imageName = @"light";
+//    [sensor1 addObject:sp];
+//    //空气湿度
+//    sp = [SensorParameter new];
+//    sp.number = @"3";
+//    sp.imageName = @"air_humidity";
+//    [sensor1 addObject:sp];
+//    [self.m_data addObject:sensor1];
     
     //CO2温湿度变送器
     
@@ -142,28 +151,40 @@
         {
             NSLog(@"连接成功,哈哈！👌\n");
             //连接成功订阅
-            [self mqttSubscribe];
+            [self mqttSubscribe1];
         }
     }];
     
     
 }
 
--(void)mqttSubscribe{
+-(void)mqttSubscribe1{
     //订阅
-    NSLog(@"mqttSubscribe😄\n");
+    NSLog(@"传感器订阅😄\n");
     [self.m_Session subscribeToTopic:@"jcsf/gh/iotdata" atLevel:MQTTQosLevelAtMostOnce subscribeHandler:^(NSError *error, NSArray<NSNumber *> *gQoss) {
         if (error) {
             NSLog(@"订阅失败 %@", error.localizedDescription);
         } else {
-            NSLog(@"订阅成功 Granted Qos: %@👌", gQoss);
+            NSLog(@"传感器订阅成功 Granted Qos: %@👌", gQoss);
+        }
+    }];
+}
+
+-(void)mqttSubscribe2{
+    //订阅
+    NSLog(@"传感器订阅😄\n");
+    [self.m_Session subscribeToTopic:@"jcsf/gh/control" atLevel:MQTTQosLevelAtMostOnce subscribeHandler:^(NSError *error, NSArray<NSNumber *> *gQoss) {
+        if (error) {
+            NSLog(@"订阅失败 %@", error.localizedDescription);
+        } else {
+            NSLog(@"控制器订阅成功 Granted Qos: %@👌", gQoss);
         }
     }];
 }
 
 - (void)newMessage:(MQTTSession *)session data:(NSData *)data onTopic:(NSString *)topic qos:(MQTTQosLevel)qos retained:(BOOL)retained mid:(unsigned int)mid {
     // New message received in topic
-    NSLog(@"订阅的主题是： %@",topic);
+    NSLog(@"订阅的主题1是： %@",topic);
     
     [_pagerView reloadData];
     [self changePageViewStyle];
@@ -621,19 +642,155 @@
 }
 
 - (IBAction)publicID2:(id)sender {
+    _conID2.continuous = false;
+    if(_conID2.value >= 0.5 && _conID2.value <= 1.5){
+        _conID2.value = 1;
+    }else if(_conID2.value < 0.5){
+        _conID2.value = 0;
+    }else{
+        _conID2.value = 2;
+    }
+    NSDictionary *dict;
+    //0停，1开，2关
+    if(_conID2.value == 0){
+        dict = @{@"Obj":@"SW",@"ID":@"2",@"Cmd":@"Action",@"Param":@"2"};
+    }else if(_conID2.value == 1){
+        dict = @{@"Obj":@"SW",@"ID":@"2",@"Cmd":@"Action",@"Param":@"0"};
+    }else{
+        dict = @{@"Obj":@"SW",@"ID":@"2",@"Cmd":@"Action",@"Param":@"1"};
+    }
     
+    BOOL isValid = [NSJSONSerialization isValidJSONObject:dict];
+    if (!isValid) {
+        NSLog(@"发布格式不正确");
+        return;
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    
+    //发布信息
+    [self.m_Session publishData:jsonData onTopic:@"jcsf/gh/control" retain:NO qos:MQTTQosLevelAtLeastOnce publishHandler:^(NSError *error) {
+        if(error)
+        {
+            NSLog(@"发布失败 %@",error.localizedDescription);
+        }
+        else
+        {
+            NSLog(@"发布成功");
+        }
+    }];
 }
 
 - (IBAction)publicID3:(id)sender {
+    _conID3.continuous = false;
+    if(_conID3.value >= 0.5 && _conID3.value <= 1.5){
+        _conID3.value = 1;
+    }else if(_conID3.value < 0.5){
+        _conID3.value = 0;
+    }else{
+        _conID3.value = 2;
+    }
+    NSDictionary *dict;
+    if(_conID3.value == 0){
+        dict = @{@"Obj":@"SW",@"ID":@"3",@"Cmd":@"Action",@"Param":@"2"};
+    }else if(_conID3.value == 1){
+        dict = @{@"Obj":@"SW",@"ID":@"3",@"Cmd":@"Action",@"Param":@"0"};
+    }else{
+        dict = @{@"Obj":@"SW",@"ID":@"3",@"Cmd":@"Action",@"Param":@"1"};
+    }
     
+    BOOL isValid = [NSJSONSerialization isValidJSONObject:dict];
+    if (!isValid) {
+        NSLog(@"发布格式不正确");
+        return;
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    
+    //发布信息
+    [self.m_Session publishData:jsonData onTopic:@"jcsf/gh/control" retain:NO qos:MQTTQosLevelAtLeastOnce publishHandler:^(NSError *error) {
+        if(error)
+        {
+            NSLog(@"发布失败 %@",error.localizedDescription);
+        }
+        else
+        {
+            NSLog(@"发布成功");
+        }
+    }];
 }
 
 - (IBAction)publicID4:(id)sender {
+    _conID4.continuous = false;
+    if(_conID4.value >= 0.5 && _conID4.value <= 1.5){
+        _conID4.value = 1;
+    }else if(_conID4.value < 0.5){
+        _conID4.value = 0;
+    }else{
+        _conID4.value = 2;
+    }
+    NSDictionary *dict;
+    if(_conID4.value == 0){
+        dict = @{@"Obj":@"SW",@"ID":@"4",@"Cmd":@"Action",@"Param":@"2"};
+    }else if(_conID4.value == 1){
+        dict = @{@"Obj":@"SW",@"ID":@"4",@"Cmd":@"Action",@"Param":@"0"};
+    }else{
+        dict = @{@"Obj":@"SW",@"ID":@"4",@"Cmd":@"Action",@"Param":@"1"};
+    }
     
+    BOOL isValid = [NSJSONSerialization isValidJSONObject:dict];
+    if (!isValid) {
+        NSLog(@"发布格式不正确");
+        return;
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    
+    //发布信息
+    [self.m_Session publishData:jsonData onTopic:@"jcsf/gh/control" retain:NO qos:MQTTQosLevelAtLeastOnce publishHandler:^(NSError *error) {
+        if(error)
+        {
+            NSLog(@"发布失败 %@",error.localizedDescription);
+        }
+        else
+        {
+            NSLog(@"发布成功");
+        }
+    }];
 }
 
 - (IBAction)publicID5:(id)sender {
+    NSDictionary *dict;
+    if(_conID5.on == 0){
+        dict = @{@"Obj":@"SW",@"ID":@"5",@"Cmd":@"Action",@"Param":@"0"};
+    }else{
+        dict = @{@"Obj":@"SW",@"ID":@"5",@"Cmd":@"Action",@"Param":@"1"};
+    }
     
+    BOOL isValid = [NSJSONSerialization isValidJSONObject:dict];
+    if (!isValid) {
+        NSLog(@"发布格式不正确");
+        return;
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    
+    //发布信息
+    [self.m_Session publishData:jsonData onTopic:@"jcsf/gh/control" retain:NO qos:MQTTQosLevelAtLeastOnce publishHandler:^(NSError *error) {
+        if(error)
+        {
+            NSLog(@"发布失败 %@",error.localizedDescription);
+        }
+        else
+        {
+            NSLog(@"发布成功");
+        }
+    }];
+}
+
+-(void)changeSliderStyle:(UISlider *)slider{
+    [slider setThumbImage:[UIImage imageNamed:@"controller_dot"] forState:UIControlStateNormal];
+    UIEdgeInsets insets = UIEdgeInsetsMake(0, 15, 0, 15);
+    [slider setMinimumTrackImage:[[UIImage imageNamed:@"controller_slider"]resizableImageWithCapInsets:insets] forState:UIControlStateNormal];
+    //    [slider setMinimumTrackImage:[UIImage imageNamed:@"controller_slider"] forState:UIControlStateNormal];
+    [slider setMaximumTrackImage:[[UIImage imageNamed:@"controller_slider"]resizableImageWithCapInsets:insets] forState:UIControlStateNormal];
+    //    [slider setMaximumTrackImage:[UIImage imageNamed:@"controller_slider"] forState:UIControlStateNormal];
 }
 
 
