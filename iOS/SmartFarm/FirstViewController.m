@@ -78,6 +78,9 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 
+@property (weak, nonatomic) NSData *data1;
+
+
 
 
 @end
@@ -87,7 +90,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _conID2.value = 1;
+    _conID3.value = 1;
+    _conID4.value = 1;
+    
     self.scrollView.contentSize = CGSizeMake(350, 443);
+    _scrollView.hidden = true;
     
     [self changeSliderStyle:_conID2];
     [self changeSliderStyle:_conID3];
@@ -95,26 +103,26 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:239.0/255.0 green:244.0/255.0 blue:244.0/255.0 alpha:1.0];
     
-//    self.m_data = [NSMutableArray arrayWithCapacity:6];
+    //    self.m_data = [NSMutableArray arrayWithCapacity:6];
     
     //光照温湿度变送器
-//    NSMutableArray* sensor1 = [NSMutableArray arrayWithCapacity:3];
-//    //温度
-//    SensorParameter* sp = [SensorParameter new];
-//    sp.number = @"1";
-//    sp.imageName = @"temp";
-//    [sensor1 addObject:sp];
-//    //光照
-//    sp = [SensorParameter new];
-//    sp.number = @"2";
-//    sp.imageName = @"light";
-//    [sensor1 addObject:sp];
-//    //空气湿度
-//    sp = [SensorParameter new];
-//    sp.number = @"3";
-//    sp.imageName = @"air_humidity";
-//    [sensor1 addObject:sp];
-//    [self.m_data addObject:sensor1];
+    //    NSMutableArray* sensor1 = [NSMutableArray arrayWithCapacity:3];
+    //    //温度
+    //    SensorParameter* sp = [SensorParameter new];
+    //    sp.number = @"1";
+    //    sp.imageName = @"temp";
+    //    [sensor1 addObject:sp];
+    //    //光照
+    //    sp = [SensorParameter new];
+    //    sp.number = @"2";
+    //    sp.imageName = @"light";
+    //    [sensor1 addObject:sp];
+    //    //空气湿度
+    //    sp = [SensorParameter new];
+    //    sp.number = @"3";
+    //    sp.imageName = @"air_humidity";
+    //    [sensor1 addObject:sp];
+    //    [self.m_data addObject:sensor1];
     
     //CO2温湿度变送器
     
@@ -152,6 +160,7 @@
             NSLog(@"连接成功,哈哈！👌\n");
             //连接成功订阅
             [self mqttSubscribe1];
+            
         }
     }];
     
@@ -178,101 +187,213 @@
             NSLog(@"订阅失败 %@", error.localizedDescription);
         } else {
             NSLog(@"控制器订阅成功 Granted Qos: %@👌", gQoss);
+            //            [self newMessage:_m_Session data:(NSData *) onTopic:@"jcsf/gh/iotdata" qos:MQTTQosLevelAtLeastOnce retained:(BOOL) mid:<#(unsigned int)#>]
         }
     }];
 }
 
 - (void)newMessage:(MQTTSession *)session data:(NSData *)data onTopic:(NSString *)topic qos:(MQTTQosLevel)qos retained:(BOOL)retained mid:(unsigned int)mid {
     // New message received in topic
-    NSLog(@"订阅的主题1是： %@",topic);
+    NSLog(@"订阅的主题是： %@",topic);
     
-    [_pagerView reloadData];
-    [self changePageViewStyle];
-    
-    NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"收到的是：%@\n",dataString);
-    //NSData* jsonData = [dataString dataUsingEncoding:NSUTF8StringEncoding];
-    //解析 data 对象
-    // 返回值可能会 字典，也可能为 数组，所以用 id 类型接受
-    id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-    if(jsonObj == nil){
-        NSLog(@"为空！\n");
-    }
-    
-    if ([jsonObj isKindOfClass:[NSDictionary class]]) {
-        //强制转换为 NSDictionary
-        NSDictionary * dic = (NSDictionary *)jsonObj;
+    if([topic isEqualToString:@"jcsf/gh/iotdata"])
+    {
+        NSLog(@"传感器接收成功");
+        [_pagerView reloadData];
+        [self changePageViewStyle];
         
-        //订阅iotdata时
-        NSString* Obj = [dic objectForKey:@"Obj"];
-        NSLog(@"Obj is %@\n", Obj);
-        NSString* Num = [dic objectForKey:@"Num"];
-        NSLog(@"Num is %@\n", Num);
-        
-        NSArray* TimeArray = [dic objectForKey:@"Time"];
-        NSArray* PayLoadArray = [dic objectForKey:@"Payload"];
-        int i = 0;
-        for(dic in TimeArray){
-            NSLog(@"Time is %@",TimeArray[i]);
-            i++;
+        NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"收到的是：%@\n",dataString);
+        //NSData* jsonData = [dataString dataUsingEncoding:NSUTF8StringEncoding];
+        //解析 data 对象
+        // 返回值可能会 字典，也可能为 数组，所以用 id 类型接受
+        id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        if(jsonObj == nil){
+            NSLog(@"为空！\n");
         }
         
-        for (dic in PayLoadArray) {
-            NSLog(@"!!!!!\n");
-            NSString* ID = [dic objectForKey:@"ID"];
-            NSLog(@"ID is %@\n",ID);
+        if ([jsonObj isKindOfClass:[NSDictionary class]]) {
+            //强制转换为 NSDictionary
+            NSDictionary * dic = (NSDictionary *)jsonObj;
             
-            //NSString转NSNumber
-            NSNumber *numID = @([ID integerValue]);
+            //订阅iotdata时
+            NSString* Obj = [dic objectForKey:@"Obj"];
+            NSLog(@"Obj is %@\n", Obj);
+            NSString* Num = [dic objectForKey:@"Num"];
+            NSLog(@"Num is %@\n", Num);
             
-            NSString* Type = [dic objectForKey:@"Type"];
-            NSLog(@"Type is %@\n",Type);
-            NSArray* DataArray = [dic objectForKey:@"Data"];
-            int i=0;
-            for(dic in DataArray){
-                NSLog(@"Data is %@",DataArray[i]);
+            NSArray* TimeArray = [dic objectForKey:@"Time"];
+            NSArray* PayLoadArray = [dic objectForKey:@"Payload"];
+            int i = 0;
+            for(dic in TimeArray){
+                NSLog(@"Time is %@",TimeArray[i]);
                 i++;
             }
-            if([numID isEqualToNumber:[NSNumber numberWithInteger:1]] && DataArray.count == 3)
-            {
-                //设置lbl的text
-                _temp1 = [NSString stringWithFormat:@"%@",DataArray[0]];
-                _air1 = [NSString stringWithFormat:@"%@",DataArray[1]];
-                _light = [NSString stringWithFormat:@"%@",DataArray[2]];
-            }
-            if([numID isEqualToNumber:[NSNumber numberWithInteger:2]] && DataArray.count == 3)
-            {
-                //设置lbl的text
-                _temp2 = [NSString stringWithFormat:@"%@",DataArray[0]];
-                _air2 = [NSString stringWithFormat:@"%@",DataArray[1]];
-                _CO2 = [NSString stringWithFormat:@"%@",DataArray[2]];
-            }
-            if([numID isEqualToNumber:[NSNumber numberWithInteger:3]] && DataArray.count == 2)
-            {
-                //设置lbl的text
-                _temp3 = [NSString stringWithFormat:@"%@",DataArray[0]];
-                _soil3 = [NSString stringWithFormat:@"%@",DataArray[1]];
-            }
-            if([numID isEqualToNumber:[NSNumber numberWithInteger:4]] && DataArray.count == 2)
-            {
-                //设置lbl的text
-                _temp4 = [NSString stringWithFormat:@"%@",DataArray[0]];
-                _soil4 = [NSString stringWithFormat:@"%@",DataArray[1]];
-            }
-            if([numID isEqualToNumber:[NSNumber numberWithInteger:5]] && DataArray.count == 2)
-            {
-                //设置lbl的text
-                _temp5 = [NSString stringWithFormat:@"%@",DataArray[0]];
-                _soil5 = [NSString stringWithFormat:@"%@",DataArray[1]];
-            }
-            if([numID isEqualToNumber:[NSNumber numberWithInteger:10]] && DataArray.count == 2)
-            {
-                //设置lbl的text
-                _conductivity = [NSString stringWithFormat:@"%@",DataArray[0]];
-                _salinity = [NSString stringWithFormat:@"%@",DataArray[1]];
+            
+            for (dic in PayLoadArray){
+                NSLog(@"!!!!!\n");
+                NSString* ID = [dic objectForKey:@"ID"];
+                NSLog(@"ID is %@\n",ID);
+                
+                //NSString转NSNumber
+                NSNumber *numID = @([ID integerValue]);
+                
+                NSString* Type = [dic objectForKey:@"Type"];
+                NSLog(@"Type is %@\n",Type);
+                NSArray* DataArray = [dic objectForKey:@"Data"];
+                int i=0;
+                for(dic in DataArray){
+                    NSLog(@"Data is %@",DataArray[i]);
+                    i++;
+                }
+                if([numID isEqualToNumber:[NSNumber numberWithInteger:1]] && DataArray.count == 3)
+                {
+                    //设置lbl的text
+                    _temp1 = [NSString stringWithFormat:@"%@",DataArray[0]];
+                    _air1 = [NSString stringWithFormat:@"%@",DataArray[1]];
+                    _light = [NSString stringWithFormat:@"%@",DataArray[2]];
+                }
+                if([numID isEqualToNumber:[NSNumber numberWithInteger:2]] && DataArray.count == 3)
+                {
+                    //设置lbl的text
+                    _temp2 = [NSString stringWithFormat:@"%@",DataArray[0]];
+                    _air2 = [NSString stringWithFormat:@"%@",DataArray[1]];
+                    _CO2 = [NSString stringWithFormat:@"%@",DataArray[2]];
+                }
+                if([numID isEqualToNumber:[NSNumber numberWithInteger:3]] && DataArray.count == 2)
+                {
+                    //设置lbl的text
+                    _temp3 = [NSString stringWithFormat:@"%@",DataArray[0]];
+                    _soil3 = [NSString stringWithFormat:@"%@",DataArray[1]];
+                }
+                if([numID isEqualToNumber:[NSNumber numberWithInteger:4]] && DataArray.count == 2)
+                {
+                    //设置lbl的text
+                    _temp4 = [NSString stringWithFormat:@"%@",DataArray[0]];
+                    _soil4 = [NSString stringWithFormat:@"%@",DataArray[1]];
+                }
+                if([numID isEqualToNumber:[NSNumber numberWithInteger:5]] && DataArray.count == 2)
+                {
+                    //设置lbl的text
+                    _temp5 = [NSString stringWithFormat:@"%@",DataArray[0]];
+                    _soil5 = [NSString stringWithFormat:@"%@",DataArray[1]];
+                }
+                if([numID isEqualToNumber:[NSNumber numberWithInteger:10]] && DataArray.count == 2)
+                {
+                    //设置lbl的text
+                    _conductivity = [NSString stringWithFormat:@"%@",DataArray[0]];
+                    _salinity = [NSString stringWithFormat:@"%@",DataArray[1]];
+                }
             }
         }
-    };
+    }
+    
+    if([topic isEqualToString:@"jcsf/gh/control"])
+    {
+        NSLog(@"控制器接收成功");
+        NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"收到的是：%@\n",dataString);
+        //NSData* jsonData = [dataString dataUsingEncoding:NSUTF8StringEncoding];
+        //解析 data 对象
+        // 返回值可能会 字典，也可能为 数组，所以用 id 类型接受
+        id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        if(jsonObj == nil){
+            NSLog(@"为空！\n");
+        }
+        
+        if ([jsonObj isKindOfClass:[NSDictionary class]]) {
+            //强制转换为 NSDictionary
+            NSDictionary * dic = (NSDictionary *)jsonObj;
+            
+            //订阅 control  时
+            NSString* Cmd = [dic objectForKey:@"Cmd"];
+            NSLog(@"Cmd is %@\n",Cmd);
+            NSString* ID = [dic objectForKey:@"ID"];
+            NSLog(@"ID is %@\n",ID);
+            NSString* Obj = [dic objectForKey:@"Obj"];
+            NSLog(@"Obj is %@\n",Obj);
+            NSString* Param = [dic objectForKey:@"Param"];
+            NSLog(@"Param is %@\n",Param);
+            
+            int intID = [ID intValue];
+            int intParam = [Param intValue];
+            switch (intID) {
+                case 0:
+                    _conID1.on = intParam;
+                    _conID5.on = intParam;
+                    if(intParam == 0)
+                    {
+                        _conID2.value = 1;
+                        _conID3.value = 1;
+                        _conID4.value = 1;
+                    }else if(intParam == 1)
+                    {
+                        _conID2.value = 2;
+                        _conID3.value = 2;
+                        _conID4.value = 2;
+                    }
+                    else{
+                        _conID2.value = 0;
+                        _conID3.value = 0;
+                        _conID4.value = 0;
+                    }
+                    break;
+                case 1:
+                    _conID1.on = intParam;
+                    break;
+                case 2:
+                    //传值：0停，1开，2关
+                    //UI：0关，1停，2开
+                    if(intParam == 0)
+                    {
+                        _conID2.value = 1;
+                    }
+                    else if(intParam == 1)
+                    {
+                        _conID2.value = 2;
+                    }
+                    else
+                    {
+                        _conID2.value = 0;
+                    }
+                    break;
+                case 3:
+                    if(intParam == 0)
+                    {
+                        _conID3.value = 1;
+                    }
+                    else if(intParam == 1)
+                    {
+                        _conID3.value = 2;
+                    }
+                    else
+                    {
+                        _conID3.value = 0;
+                    }
+                    break;
+                case 4:
+                    if(intParam == 0)
+                    {
+                        _conID4.value = 1;
+                    }
+                    else if(intParam == 1)
+                    {
+                        _conID4.value = 2;
+                    }
+                    else
+                    {
+                        _conID4.value = 0;
+                    }
+                    break;
+                case 5:
+                    _conID5.on = intParam;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    
     
 }
 
@@ -561,55 +682,55 @@
     {
         _imgWea = [UIImage imageNamed:@"yu"];
         _imgViewWea.image = _imgWea;
-        _imgViewWea.frame = CGRectMake(37, 117, 70, 66.5);
+        _imgViewWea.frame = CGRectMake(37, 77, 70, 66.5);
     }
     else if([weather  isEqualToString:@"阴"])
     {
         _imgWea = [UIImage imageNamed:@"yin"];
         _imgViewWea.image = _imgWea;
-        _imgViewWea.frame = CGRectMake(37, 127, 70, 48.4);
+        _imgViewWea.frame = CGRectMake(37, 87, 70, 48.4);
     }
     else if([weather  isEqualToString:@"多云"])
     {
         _imgWea = [UIImage imageNamed:@"duoyun"];
         _imgViewWea.image = _imgWea;
-        _imgViewWea.frame = CGRectMake(37, 130, 70, 43.8);
+        _imgViewWea.frame = CGRectMake(37, 90, 70, 43.8);
     }
     else if([weather  isEqualToString:@"雾"])
     {
         _imgWea = [UIImage imageNamed:@"wu"];
         _imgViewWea.image = _imgWea;
-        _imgViewWea.frame = CGRectMake(37, 114, 70, 71.2);
+        _imgViewWea.frame = CGRectMake(37, 74, 70, 71.2);
     }
     else if([weather  isEqualToString:@"晴"])
     {
         _imgWea = [UIImage imageNamed:@"qing"];
         _imgViewWea.image = _imgWea;
-        _imgViewWea.frame = CGRectMake(37, 117, 70, 70);
+        _imgViewWea.frame = CGRectMake(37, 77, 70, 70);
     }
     else if([weather  isEqualToString:@"雷"])
     {
         _imgWea = [UIImage imageNamed:@"lei"];
         _imgViewWea.image = _imgWea;
-        _imgViewWea.frame = CGRectMake(60, 117, 38.5, 70);
+        _imgViewWea.frame = CGRectMake(60, 77, 38.5, 70);
     }
     else if([weather  isEqualToString:@"沙尘"])
     {
         _imgWea = [UIImage imageNamed:@"shachen"];
         _imgViewWea.image = _imgWea;
-        _imgViewWea.frame = CGRectMake(37, 135, 70, 36.7);
+        _imgViewWea.frame = CGRectMake(37, 95, 70, 36.7);
     }
     else if([weather  isEqualToString:@"雪"])
     {
         _imgWea = [UIImage imageNamed:@"xue"];
         _imgViewWea.image = _imgWea;
-        _imgViewWea.frame = CGRectMake(37, 113, 70, 76);
+        _imgViewWea.frame = CGRectMake(37, 73, 70, 76);
     }
     else if([weather  isEqualToString:@"冰雹"])
     {
         _imgWea = [UIImage imageNamed:@"bingbao"];
         _imgViewWea.image = _imgWea;
-        _imgViewWea.frame = CGRectMake(37, 113, 70, 74);
+        _imgViewWea.frame = CGRectMake(37, 73, 70, 74);
     }
 }
 
@@ -793,8 +914,6 @@
     //    [slider setMaximumTrackImage:[UIImage imageNamed:@"controller_slider"] forState:UIControlStateNormal];
 }
 
-
-
 - (IBAction)actSensor:(id)sender {
     _btnSensor.selected = true;
     _btnController.selected = false;
@@ -811,12 +930,13 @@
     if(_btnSensor.selected == true)
     {
         _pagerView.hidden = false;
-        
+        _scrollView.hidden = true;
     }
     else
     {
         _pagerView.hidden = true;
-        
+        _scrollView.hidden = false;
+        [self mqttSubscribe2];
     }
 }
 
