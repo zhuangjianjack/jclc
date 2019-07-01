@@ -317,79 +317,84 @@
             
             int intID = [ID intValue];
             int intParam = [Param intValue];
-            switch (intID) {
-                case 0:
-                    _conID1.on = intParam;
-                    _conID5.on = intParam;
-                    if(intParam == 0)
-                    {
-                        _conID2.value = 1;
-                        _conID3.value = 1;
-                        _conID4.value = 1;
-                    }else if(intParam == 1)
-                    {
-                        _conID2.value = 2;
-                        _conID3.value = 2;
-                        _conID4.value = 2;
-                    }
-                    else{
-                        _conID2.value = 0;
-                        _conID3.value = 0;
-                        _conID4.value = 0;
-                    }
-                    break;
-                case 1:
-                    _conID1.on = intParam;
-                    break;
-                case 2:
-                    //传值：0停，1开，2关
-                    //UI：0关，1停，2开
-                    if(intParam == 0)
-                    {
-                        _conID2.value = 1;
-                    }
-                    else if(intParam == 1)
-                    {
-                        _conID2.value = 2;
-                    }
-                    else
-                    {
-                        _conID2.value = 0;
-                    }
-                    break;
-                case 3:
-                    if(intParam == 0)
-                    {
-                        _conID3.value = 1;
-                    }
-                    else if(intParam == 1)
-                    {
-                        _conID3.value = 2;
-                    }
-                    else
-                    {
-                        _conID3.value = 0;
-                    }
-                    break;
-                case 4:
-                    if(intParam == 0)
-                    {
-                        _conID4.value = 1;
-                    }
-                    else if(intParam == 1)
-                    {
-                        _conID4.value = 2;
-                    }
-                    else
-                    {
-                        _conID4.value = 0;
-                    }
-                    break;
-                case 5:
-                    _conID5.on = intParam;
-                    break;
-                default:
-                    break;
+            
+            if([Cmd isEqualToString:@"Action"])
+                
+            {
+                switch (intID) {
+                    case 0:
+                        _conID1.on = intParam;
+                        _conID5.on = intParam;
+                        if(intParam == 0)
+                        {
+                            _conID2.value = 1;
+                            _conID3.value = 1;
+                            _conID4.value = 1;
+                        }else if(intParam == 1)
+                        {
+                            _conID2.value = 2;
+                            _conID3.value = 2;
+                            _conID4.value = 2;
+                        }
+                        else{
+                            _conID2.value = 0;
+                            _conID3.value = 0;
+                            _conID4.value = 0;
+                        }
+                        break;
+                    case 1:
+                        _conID1.on = intParam;
+                        break;
+                    case 2:
+                        //传值：0停，1开，2关
+                        //UI：0关，1停，2开
+                        if(intParam == 0)
+                        {
+                            _conID2.value = 1;
+                        }
+                        else if(intParam == 1)
+                        {
+                            _conID2.value = 2;
+                        }
+                        else
+                        {
+                            _conID2.value = 0;
+                        }
+                        break;
+                    case 3:
+                        if(intParam == 0)
+                        {
+                            _conID3.value = 1;
+                        }
+                        else if(intParam == 1)
+                        {
+                            _conID3.value = 2;
+                        }
+                        else
+                        {
+                            _conID3.value = 0;
+                        }
+                        break;
+                    case 4:
+                        if(intParam == 0)
+                        {
+                            _conID4.value = 1;
+                        }
+                        else if(intParam == 1)
+                        {
+                            _conID4.value = 2;
+                        }
+                        else
+                        {
+                            _conID4.value = 0;
+                        }
+                        break;
+                    case 5:
+                        _conID5.on = intParam;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
@@ -937,8 +942,32 @@
         _pagerView.hidden = true;
         _scrollView.hidden = false;
         [self mqttSubscribe2];
+        [self Query];
     }
 }
 
-
+-(void)Query{
+    NSDictionary *dict;
+    
+    dict = @{@"Obj":@"SW",@"ID":@"0",@"Cmd":@"Query"};
+    
+    BOOL isValid = [NSJSONSerialization isValidJSONObject:dict];
+    if (!isValid) {
+        NSLog(@"发布格式不正确");
+        return;
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    
+    //发布信息
+    [self.m_Session publishData:jsonData onTopic:@"jcsf/gh/control" retain:NO qos:MQTTQosLevelAtLeastOnce publishHandler:^(NSError *error) {
+        if(error)
+        {
+            NSLog(@"发布失败 %@",error.localizedDescription);
+        }
+        else
+        {
+            NSLog(@"发布成功");
+        }
+    }];
+}
 @end
