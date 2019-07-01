@@ -22,7 +22,7 @@
 //@property(nonatomic, copy) NSString* imageName;
 //@end
 
-@interface FirstViewController ()<TYCyclePagerViewDataSource, TYCyclePagerViewDelegate,MQTTSessionDelegate>
+@interface FirstViewController ()<TYCyclePagerViewDataSource, TYCyclePagerViewDelegate,MQTTSessionDelegate,CAAnimationDelegate>
 
 @property MQTTSession *m_Session;
 
@@ -95,7 +95,8 @@
     _conID4.value = 1;
     
     self.scrollView.contentSize = CGSizeMake(350, 443);
-    _scrollView.hidden = true;
+//    _scrollView.hidden = true;
+    _scrollView.alpha = 0.0;
     
     [self changeSliderStyle:_conID2];
     [self changeSliderStyle:_conID3];
@@ -929,13 +930,42 @@
 -(void)switchSubview{
     if(_btnSensor.selected == true)
     {
-        _pagerView.hidden = false;
-        _scrollView.hidden = true;
+//        _pagerView.hidden = false;
+//        _scrollView.hidden = true;
+        [UIView animateWithDuration:0.5 animations:^{
+            self->_pagerView.alpha = 1.0;
+            self->_scrollView.alpha = 0.0;
+        }];
+        CATransition *caTransition = [CATransition animation];
+        caTransition.duration = 0.5;
+        caTransition.delegate = self;
+        caTransition.timingFunction = [CAMediaTimingFunction functionWithName:@"easeInEaseOut"];//切换时间函数
+        caTransition.type = kCATransitionReveal;//动画切换风格
+        caTransition.subtype = kCATransitionFromLeft;//动画切换方向
+        
+        //    子视图交换位置
+        //[self.parentView exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
+        //动画在父视图
+        [self.scrollView.layer addAnimation:caTransition forKey:@"Key"];
     }
     else
     {
-        _pagerView.hidden = true;
-        _scrollView.hidden = false;
+//        _pagerView.hidden = true;
+//        _scrollView.hidden = false;
+        [UIView animateWithDuration:0.5 animations:^{
+            self->_pagerView.alpha = 0.0;
+            self->_scrollView.alpha = 1.0;
+        }];
+        CATransition *caTransition = [CATransition animation];
+        caTransition.duration = 0.5;
+        caTransition.delegate = self;
+        caTransition.timingFunction = [CAMediaTimingFunction functionWithName:@"easeInEaseOut"];//切换时间函数
+        caTransition.type = kCATransitionReveal;//动画切换风格
+        caTransition.subtype = kCATransitionFromRight;//动画切换方向
+    
+        [self.pagerView.layer addAnimation:caTransition forKey:@"Key"];
+        
+        
         [self mqttSubscribe2];
     }
 }
