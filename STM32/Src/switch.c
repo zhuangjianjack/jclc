@@ -81,7 +81,7 @@ BOOL_t SW_Cmd_Exec(PtrQue_TypeDef * swq)
   * @note   
   * @retval None
   */
-void SW_Cmd_Analysis(PtrQue_TypeDef * swq, char c)
+void SW_Cmd_Analysis(PtrQue_TypeDef * pq, char c)
 {
 	static char buf[5];
 	static uint8_t i = 0;
@@ -162,8 +162,9 @@ CommandResType_t SW_OFF(SW_Handle_t * sw)
 		case SW_SUNSHADE:
 		case SW_TOPFILM:
 		case SW_SIDEFILM:
+			K_OFF(sw->k2_port, sw->k2_pin);//put K_OFF before K_ON to avoid K1 ON and K2 ON(whill short-circuit).
+			HAL_Delay(RELAY_DELAY);//put HAL_Delay() behind K_OFF to waiting relay action.
 			K_ON(sw->k1_port, sw->k1_pin);
-			K_OFF(sw->k2_port, sw->k2_pin);
 			sw->status = ACT_OFF;
 			res = RES_OK;
 			break;
@@ -182,11 +183,13 @@ CommandResType_t SW_ON(SW_Handle_t * sw)
 		case SW_TOPFILM:
 		case SW_SIDEFILM:
 			K_OFF(sw->k1_port, sw->k1_pin);
+			HAL_Delay(RELAY_DELAY);
 			K_ON(sw->k2_port, sw->k2_pin);
 			break;
 		case SW_LIGHT:
-			K_ON(sw->k1_port, sw->k1_pin);
 			K_OFF(sw->k2_port, sw->k2_pin);
+			HAL_Delay(RELAY_DELAY);
+			K_ON(sw->k1_port, sw->k1_pin);
 			break;
 	}
 	sw->status = ACT_ON;

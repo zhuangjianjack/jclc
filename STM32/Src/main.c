@@ -78,6 +78,8 @@ uint32_t lastptime = 0;//上一次巡检时间
 CircleQue_TypeDef qbuf1, qbuf2;
 PtrQue_TypeDef sens_que;
 PtrQue_TypeDef switch_que;
+PtrQue_TypeDef msg_que;
+volatile uint8_t gevents = 0;
 __IO ITStatus Uart1TxCplt = RESET;
 __IO ITStatus Uart1RxCplt = RESET;
 __IO ITStatus Uart2TxCplt = RESET;
@@ -145,6 +147,7 @@ int main(void)
 	Que_Init(&qbuf2);
 	Sensors_Que_Init(&sens_que);
 	SW_Que_Init(&switch_que);
+	PtrQue_Init(&msg_que);
 	printf_dbg("Senor Networks Controller Ready!\r\n");
 	if(HAL_UART_Receive_IT(&huart1, (uint8_t*)aRx1Buffer, 1)!= HAL_OK)
   {
@@ -163,7 +166,9 @@ int main(void)
   {
 		if (Que_Out(&qbuf1, &b))//检查缓冲区队列是否有数据，有则进行命令解析
 		{
-			SW_Cmd_Analysis(&switch_que, b);
+			while (HAL_UART_Receive_IT(&huart1, (uint8_t*)aRx1Buffer, 1)!= HAL_OK);//下达接收任务必须成功，否则不能再收到后续数据
+			//SW_Cmd_Analysis(&switch_que, b);
+			UART_Msg_Rx(b);
 		}
 //		SW_Cmd_Exec(&switch_que);//如果收到命令，控制开关动作
 		if ((HAL_GetTick() - lastptime + 0x100000000) % 0x100000000 >= POLLING_PERIOD * 1000)
@@ -398,7 +403,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 	{
 		Uart1RxCplt = SET;
 		Que_In(&qbuf1, aRx1Buffer[0]);//入队
-		while (HAL_UART_Receive_IT(&huart1, (uint8_t*)aRx1Buffer, 1)!= HAL_OK);//下达接收任务必须成功，否则不能再收到后续数据
+//		while (HAL_UART_Receive_IT(&huart1, (uint8_t*)aRx1Buffer, 1)!= HAL_OK);//下达接收任务必须成功，否则不能再收到后续数据
+		//can't put on ISR to avoid dead lock.
 	}
 	if (UartHandle->Instance == USART2)
 	{

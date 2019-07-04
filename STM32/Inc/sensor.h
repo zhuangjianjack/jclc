@@ -97,6 +97,7 @@ BOOL_t Modbus_Send_Cmd(Sensor_Handle_t * hs);
 BOOL_t Modbus_Receive_Resp(Sensor_Handle_t * hs);
 /*传感器巡检*/
 void Sensors_Polling(PtrQue_TypeDef * sq);
+void Sensors_Polling_Ex(PtrQue_TypeDef * sq, uint8_t id);
 /*解析巡检后的传感器数据*/
 void Sens_Data_Proc(PtrQue_TypeDef * sq);
 /*传感器队列初始化*/

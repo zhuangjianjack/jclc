@@ -4,12 +4,13 @@
 #define K_OFF(port, pin) HAL_GPIO_WritePin(port, pin, GPIO_PIN_RESET)
 #define SW_NUM 5
 #define SW_CMD_LEN 3
+#define RELAY_DELAY 100 //ms 继电器动作滞后时间
 typedef enum
 {
 	ACT_STOP = 0,
 	ACT_ON,
 	ACT_OFF
-}SwActType_t;
+}SWActType_t;
 typedef enum
 {
 	SW_FAN = 0,	//环流风机
@@ -17,19 +18,13 @@ typedef enum
 	SW_TOPFILM,	//顶卷膜
 	SW_SIDEFILM,//侧卷膜
 	SW_LIGHT		//照明
-}CommandType_t;
-typedef enum
-{
-	RES_FAILED = 0,
-	RES_OK,
-	RES_KEEP
-}CommandResType_t;
+}SWType_t;
 typedef struct
 {
-	CommandType_t	type;				//类型
-	SwActType_t	action;				//动作
+	SWType_t	type;				//类型
+	SWActType_t	action;				//动作
 	CommandResType_t result;	//命令执行结果
-	SwActType_t status;				//状态
+	SWActType_t status;				//状态
 	BOOL_t				command_new;//新命令标志
 	char *				cmdbuf;			//命令缓冲区
 	uint8_t				cmdsize;		//命令缓冲区大小

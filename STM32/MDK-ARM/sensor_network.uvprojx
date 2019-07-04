@@ -425,6 +425,11 @@
               <FileType>1</FileType>
               <FilePath>..\Src\switch.c</FilePath>
             </File>
+            <File>
+              <FileName>msg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\msg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

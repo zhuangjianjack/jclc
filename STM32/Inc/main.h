@@ -47,39 +47,28 @@
 extern "C" {
 #endif
 
-#define DEBUG_ON 1 //测试代码编译开关
-#define OLD_BOARD 0 //新旧版本的开发板编译选项
-#if (DEBUG_ON)
-#define printf_dbg(...) do { printf(__VA_ARGS__); } while (0)
-#else
-#define printf_dbg(...)
-#endif
-#if (OLD_BOARD == 1)
-#define RS485_RX_EN() HAL_GPIO_WritePin(GPIOG, GPIO_PIN_9, GPIO_PIN_RESET)
-#define RS485_TX_EN() HAL_GPIO_WritePin(GPIOG, GPIO_PIN_9, GPIO_PIN_SET)
-#else
-#define RS485_RX_EN() HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, GPIO_PIN_RESET)
-#define RS485_TX_EN() HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, GPIO_PIN_SET)
-#endif
 /* Includes ------------------------------------------------------------------*/
+#include "stm32f1xx_hal.h"
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
 #include <stdlib.h>
 #include <string.h>
-#include "stm32f1xx_hal.h"
 #include "comm_def.h"
 #include "uds.h"
 #include "sensor.h"
 #include "led.h"
+#include "msg.h"
 #include "switch.h"
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
-
+extern PtrQue_TypeDef sens_que;
+extern PtrQue_TypeDef switch_que;
+extern PtrQue_TypeDef msg_que;
+extern volatile uint8_t gevents;
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
@@ -101,7 +90,22 @@ void Error_Handler(void);
 
 /* Private defines -----------------------------------------------------------*/
 /* USER CODE BEGIN Private defines */
-
+#define DEBUG_ON 1 //测试代码编译开关
+#define OLD_BOARD 0 //新旧版本的开发板编译选项
+#if (DEBUG_ON)
+#define printf_dbg(...) do { printf(__VA_ARGS__); } while (0)
+#else
+#define printf_dbg(...)
+#endif
+#if (OLD_BOARD == 1)
+#define RS485_RX_EN() HAL_GPIO_WritePin(GPIOG, GPIO_PIN_9, GPIO_PIN_RESET)
+#define RS485_TX_EN() HAL_GPIO_WritePin(GPIOG, GPIO_PIN_9, GPIO_PIN_SET)
+#else
+#define RS485_RX_EN() HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, GPIO_PIN_RESET)
+#define RS485_TX_EN() HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, GPIO_PIN_SET)
+#endif
+#define EV_PTIMOUT	0x01		//传感器巡检时间到
+#define EV_RSTIMOUT 0x02		//运行状态翻转时间到
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
