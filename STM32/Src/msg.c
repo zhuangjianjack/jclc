@@ -83,41 +83,69 @@ void events_proc()
 {
 	Command_t * msg;
 	SW_Handle_t * swh;
+	int i;
 	while (PtrQue_Out(&msg_que, (void **)&msg))
 	{
 		printf_dbg("process msg: %c,%d,%d\r\n", msg->cmd, msg->data[0], msg->data[1]);
 		switch (msg->cmd)
 		{
 			case 'a':
+				LED0_ON();
 				Sensors_Polling_Ex(&sens_que, msg->data[0]);
+				LED0_OFF();
 				break;
 			case 'b':
 				printf("@%c,%d,%c#", msg->cmd, msg->data[0], ((SW_Handle_t *)(switch_que.data[msg->data[0] - 1]))->status);
 				break;
 			case 'c':
-				if (msg->data[0] < 1 || msg->data[0] > 5)
+				if (msg->data[0] < 0 || msg->data[0] > 5)
 				{
 					msg->retcode = RES_FAILED;
 				}
 				else
 				{
-					swh = (SW_Handle_t *)(switch_que.data[msg->data[0] - 1]);
-					switch (msg->data[1])
+					if (msg->data[0] == 0) // control all switch (ID = 0)
 					{
-						case ACT_STOP://STOP
-							msg->retcode = SW_STOP(swh);
-							break;
-						case ACT_ON://ON
-							msg->retcode = SW_ON(swh);
-							break;
-						case ACT_OFF://OFF
-							msg->retcode = SW_OFF(swh);
-							break;
-						default://no valid switch action in command string
-							msg->retcode = RES_FAILED;
+						for (i = 0; i < 5; i++)
+						{
+							swh = (SW_Handle_t *)(switch_que.data[i]);
+							switch (msg->data[1])
+							{
+								case ACT_STOP://STOP
+									msg->retcode = SW_STOP(swh);
+									break;
+								case ACT_ON://ON
+									msg->retcode = SW_ON(swh);
+									break;
+								case ACT_OFF://OFF
+									msg->retcode = SW_OFF(swh);
+									break;
+								default://no valid switch action in command string
+									msg->retcode = RES_FAILED;
+							}
+							printf("@c,%d#", msg->retcode);
+						}
+					}
+					else //control one switch
+					{
+						swh = (SW_Handle_t *)(switch_que.data[msg->data[0] - 1]);
+						switch (msg->data[1])
+						{
+							case ACT_STOP://STOP
+								msg->retcode = SW_STOP(swh);
+								break;
+							case ACT_ON://ON
+								msg->retcode = SW_ON(swh);
+								break;
+							case ACT_OFF://OFF
+								msg->retcode = SW_OFF(swh);
+								break;
+							default://no valid switch action in command string
+								msg->retcode = RES_FAILED;
+						}
+						printf("@c,%d#", msg->retcode);
 					}
 				}
-				printf("@c,%d#", msg->retcode);
 				break;
 			case 'd':
 				printf("@d,1#");
@@ -127,7 +155,9 @@ void events_proc()
 	if (gevents & EV_PTIMOUT)
 	{
 		gevents ^= EV_PTIMOUT;
+		LED0_ON();
 		Sensors_Polling_Ex(&sens_que, 0);
+		LED0_OFF();
 	}
 	if (gevents & EV_RSTIMOUT)
 	{
