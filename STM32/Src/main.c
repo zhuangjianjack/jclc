@@ -177,7 +177,6 @@ int main(void)
 		}
 		if ( (curtick = HAL_GetTick()) - lasttick >= RUNNING_BLINK_INTERVAL) 
 		{
-			LED1_TOGGLE();
 			gevents |= EV_RSTIMOUT;
 			lasttick = curtick;
 		}

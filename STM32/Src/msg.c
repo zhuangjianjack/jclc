@@ -95,10 +95,21 @@ void events_proc()
 				LED0_OFF();
 				break;
 			case 'b':
-				printf("@%c,%d,%c#", msg->cmd, msg->data[0], ((SW_Handle_t *)(switch_que.data[msg->data[0] - 1]))->status);
+				if (msg->data[0] == 0)
+				{
+					for (i = 0; i < 5; i++)
+					{
+						swh = (SW_Handle_t *)(switch_que.data[i]);
+						printf("@%d,%d,%d#", swh->type + 1, msg->data[0], swh->status);
+					}
+				}
+				else if (msg->data[0] >= 1 && msg->data[0] <= 5)
+				{
+					printf("@%c,%d,%d#", msg->cmd, msg->data[0], ((SW_Handle_t *)(switch_que.data[msg->data[0] - 1]))->status);
+				}
 				break;
 			case 'c':
-				if (msg->data[0] < 0 || msg->data[0] > 5)
+				if (msg->data[0] > 5)
 				{
 					msg->retcode = RES_FAILED;
 				}

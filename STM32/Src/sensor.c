@@ -68,28 +68,25 @@ BOOL_t Modbus_Data_Proc(Sensor_Handle_t * hs, void * result)
 		case SEN_TEMP_HUMI:
 			rbytes((uint8_t *)&(hs->modbus_resp->resp_ht.humidity), sizeof(hs->modbus_resp->resp_ht.humidity));
 			rbytes((uint8_t *)&(hs->modbus_resp->resp_ht.temperature), sizeof(hs->modbus_resp->resp_ht.temperature));
-//			printf("@%s,%.1f,%.1f\r\n", SENS_TYPE_STR[hs->type], (double)(hs->modbus_resp->resp_ht.humidity) / 10, (double)(hs->modbus_resp->resp_ht.temperature) / 10);
 			printf("@a,%c,%.1f,%.1f#", hs->modbus_cmd->cmd.rs485addr + '0', (double)(hs->modbus_resp->resp_ht.humidity) / 10, (double)(hs->modbus_resp->resp_ht.temperature) / 10);
 			break;
 		case SEN_ILLUM_T_H:
 			rbytes((uint8_t *)&(hs->modbus_resp->resp_iht.humidity), sizeof(hs->modbus_resp->resp_iht.humidity));
 			rbytes((uint8_t *)&(hs->modbus_resp->resp_iht.temperature), sizeof(hs->modbus_resp->resp_iht.temperature));
 			rbytes((uint8_t *)&(hs->modbus_resp->resp_iht.illuminance), sizeof(hs->modbus_resp->resp_iht.illuminance));
-//			printf("@%s,%.1f,%.1f,%d\r\n", SENS_TYPE_STR[hs->type], (double)(hs->modbus_resp->resp_iht.humidity) / 10, (double)(hs->modbus_resp->resp_iht.temperature) / 10, hs->modbus_resp->resp_iht.illuminance);
 			printf("@a,%c,%.1f,%.1f,%d#", hs->modbus_cmd->cmd.rs485addr + '0', (double)(hs->modbus_resp->resp_iht.humidity) / 10, (double)(hs->modbus_resp->resp_iht.temperature) / 10, hs->modbus_resp->resp_iht.illuminance);
 			break;
 		case SEN_CO2_T_H:
 			rbytes((uint8_t *)&(hs->modbus_resp->resp_co2ht.humidity), sizeof(hs->modbus_resp->resp_co2ht.humidity));
 			rbytes((uint8_t *)&(hs->modbus_resp->resp_co2ht.temperature), sizeof(hs->modbus_resp->resp_co2ht.temperature));
 			rbytes((uint8_t *)&(hs->modbus_resp->resp_co2ht.co2), sizeof(hs->modbus_resp->resp_co2ht.co2));
-//			printf("@%s,%.1f,%.1f,%d\r\n", SENS_TYPE_STR[hs->type], (double)(hs->modbus_resp->resp_co2ht.humidity) / 10, (double)(hs->modbus_resp->resp_co2ht.temperature) / 10, hs->modbus_resp->resp_co2ht.co2);
 			printf("@a,%c,%.1f,%.1f,%d#", hs->modbus_cmd->cmd.rs485addr + '0', (double)(hs->modbus_resp->resp_co2ht.humidity) / 10, (double)(hs->modbus_resp->resp_co2ht.temperature) / 10, hs->modbus_resp->resp_co2ht.co2);
 			break;
 		case SEN_COND_SALT:
 			rbytes((uint8_t *)&(hs->modbus_resp->resp_cs.cond), sizeof(hs->modbus_resp->resp_cs.cond));
 			rbytes((uint8_t *)&(hs->modbus_resp->resp_cs.salt), sizeof(hs->modbus_resp->resp_cs.salt));
-//			printf("@%s,%d,%d\r\n", SENS_TYPE_STR[hs->type], hs->modbus_resp->resp_cs.cond, hs->modbus_resp->resp_cs.salt);
-			printf("@a,%c,%d,%d#", hs->modbus_cmd->cmd.rs485addr + '0', hs->modbus_resp->resp_cs.cond, hs->modbus_resp->resp_cs.salt);
+//			printf("@a,%c,%d,%d#", hs->modbus_cmd->cmd.rs485addr + '0', hs->modbus_resp->resp_cs.cond, hs->modbus_resp->resp_cs.salt);
+			printf("@a,%s,%d,%d#", "10", hs->modbus_resp->resp_cs.cond, hs->modbus_resp->resp_cs.salt);
 	}
 	return TRUE;
 }
