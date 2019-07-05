@@ -4,7 +4,7 @@
 #define K_OFF(port, pin) HAL_GPIO_WritePin(port, pin, GPIO_PIN_RESET)
 #define SW_NUM 5
 #define SW_CMD_LEN 3
-#define RELAY_DELAY 100 //ms 继电器动作滞后时间
+#define RELAY_DELAY 1000 //ms 继电器动作滞后时间
 typedef enum
 {
 	ACT_STOP = 0,

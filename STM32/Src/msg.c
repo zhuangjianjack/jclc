@@ -134,8 +134,9 @@ void events_proc()
 								default://no valid switch action in command string
 									msg->retcode = RES_FAILED;
 							}
-							printf("@c,%d#", msg->retcode);
+//							printf("@c,%d#", msg->retcode);
 						}
+						printf("@c,1#");
 					}
 					else //control one switch
 					{

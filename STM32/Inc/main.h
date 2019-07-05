@@ -49,6 +49,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdlib.h>
@@ -90,7 +91,7 @@ void Error_Handler(void);
 
 /* Private defines -----------------------------------------------------------*/
 /* USER CODE BEGIN Private defines */
-#define DEBUG_ON 1 //测试代码编译开关
+#define DEBUG_ON 0 //测试代码编译开关
 #define OLD_BOARD 0 //新旧版本的开发板编译选项
 #if (DEBUG_ON)
 #define printf_dbg(...) do { printf(__VA_ARGS__); } while (0)
