@@ -1,0 +1,11 @@
+543c005bbe5f79cb3b5a245909b387706a749f4a (1) combines tow crc bytes to one 16bit crc related to sensor structs (2)add __packed restrict to sensor structs & unions (3)implements l2b16()function to process the converting from little endin to big endin (4)add sensors que print function Sensors_Que_Print() that relying on precompiling option DEBUG_ON
+24d526f8b28e01c280961a65c29bc549924d6fcc impements crc16 func, updating Sensors_Que_Init()
+8a43bd0cbec1741c4d41fd1a576e129273e08c45 implement Sensors_Que_Init(), baud of uart2 changed to 9600
+a882f8319442953471ad3118ab006eb3cd00299c Retargets the C library printf function to the USART1 by refering to STM32Cube HAL example
+4cd89543c6af1394bee6367aa0c1fbe9b9d30551 uart1 rx buffering, polling func called before implemented
+8c31fe08031d11732d06319a0b5880a94945af77 add led.h that defines macros of LED
+9d37648aaa918c59c61efe9f6279ce4d737d7bd2 que&sensor improving
+085d5331c9f7f5bed0f9ad16b25fb80a9fa5c3d0 del readme.txt
+3e1da77ded584bd3b151d061aedd46ab1470a804 Merge branch 'master' of github.com:scujcc2015/sensors_network
+32183ff3f0106547d142b8e67e82a27e25bef92a init project
+9943ca29ac999ff5a7f13ff78811f6aefb409ef1 Initial commit
