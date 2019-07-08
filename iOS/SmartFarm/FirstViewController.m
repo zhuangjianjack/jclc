@@ -135,7 +135,7 @@
     
     [self mqttConnect];
     
-    [self getWheather];
+    
     
 }
 
@@ -161,6 +161,7 @@
             NSLog(@"连接成功,哈哈！👌\n");
             //连接成功订阅
             [self mqttSubscribe1];
+            [self getWheather];
             
         }
     }];
