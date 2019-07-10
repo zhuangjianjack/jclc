@@ -86,6 +86,7 @@
 @end
 
 @implementation FirstViewController
+float delaytime = 1.0f;             //开关连续控制的延时时间
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -767,6 +768,9 @@
             NSLog(@"发布成功");
         }
     }];
+    [sender setEnabled:NO];
+    [self performSelector:@selector(onEnable:) withObject:sender afterDelay:delaytime];
+    //[sender delay];
 }
 
 - (IBAction)publicID2:(id)sender {
@@ -806,6 +810,8 @@
             NSLog(@"发布成功");
         }
     }];
+    [sender setEnabled:NO];
+    [self performSelector:@selector(onEnable:) withObject:sender afterDelay:delaytime];
 }
 
 - (IBAction)publicID3:(id)sender {
@@ -844,6 +850,8 @@
             NSLog(@"发布成功");
         }
     }];
+    [sender setEnabled:NO];
+    [self performSelector:@selector(onEnable:) withObject:sender afterDelay:delaytime];
 }
 
 - (IBAction)publicID4:(id)sender {
@@ -882,6 +890,8 @@
             NSLog(@"发布成功");
         }
     }];
+    [sender setEnabled:NO];
+    [self performSelector:@selector(onEnable:) withObject:sender afterDelay:delaytime];
 }
 
 - (IBAction)publicID5:(id)sender {
@@ -910,6 +920,8 @@
             NSLog(@"发布成功");
         }
     }];
+    [sender setEnabled:NO];
+    [self performSelector:@selector(onEnable:) withObject:sender afterDelay:delaytime];
 }
 
 -(void)changeSliderStyle:(UISlider *)slider{
@@ -1000,5 +1012,16 @@
             NSLog(@"发布成功");
         }
     }];
+}
+
+//-(void)delay:(UISwitch *)btn
+//{
+//    [btn setEnabled:NO];
+//    [btn performSelector:@selector(onEnableSwitch:) withObject:btn afterDelay:5.0f];
+//}
+
+-(void)onEnable:(id)sender
+{
+    [sender setEnabled:YES];
 }
 @end
