@@ -187,6 +187,7 @@ public class MqttManager {
 
         @Override
         public void deliveryComplete(IMqttDeliveryToken token) {
+
             Log.i( TAG, "deliveryComplete" );
         }
     };

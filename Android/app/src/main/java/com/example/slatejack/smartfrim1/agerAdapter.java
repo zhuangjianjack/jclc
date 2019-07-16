@@ -20,7 +20,8 @@ public class agerAdapter extends FragmentStatePagerAdapter {
                 TapFragment1 tab1 = new TapFragment1();
                 return tab1;
             case 1:
-                return new FragmentSet();
+                FragementSet1 tab2=new FragementSet1();
+                return tab2;
             default:
                 return new TapFragment1();
         }

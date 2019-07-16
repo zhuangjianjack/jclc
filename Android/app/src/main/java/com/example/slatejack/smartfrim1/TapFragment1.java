@@ -66,7 +66,7 @@ public class TapFragment1 extends Fragment {
         Result res = gson.fromJson( data, Result.class );
         Sensor sensor1 =new Sensor();
         if (res.getPayload().size()<=0) {
-            //show error on  ui
+            //show error on ui
             Log.e( TAG, "Payload empty..."  );
             return;
         }
